@@ -1,13 +1,101 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
 import heroVideo from "../assets/hero.mp4";
-import brushStroke from "../assets/brush1.png";
+import logoImg from "../assets/logo.png";
+
 
 export default function HeroSection() {
+ 
+const logoRef = useRef(null);
+const headingRef = useRef(null);
+const paraRef = useRef(null);
+const buttonRef = useRef(null);
+const waveRef = useRef(null);
+
+
+useLayoutEffect(() => {
+  const tl = gsap.timeline();
+
+  // Logo spin-in
+  tl.fromTo(
+    logoRef.current,
+    { opacity: 0, rotate: -360, scale: 0.5 },
+    {
+      opacity: 1,
+      rotate: 0,
+      scale: 1,
+      duration: 1,
+      ease: "back.out(1.7)",
+    }
+  );
+
+  // Headline (letter-by-letter using splitText manually)
+  const text = headingRef.current;
+const chars = text.innerText.split("");
+text.innerText = "";
+
+chars.forEach((char) => {
+const span = document.createElement("span");
+span.textContent = char;
+span.style.display = "inline-block";
+span.style.whiteSpace = char === " " ? "pre" : "normal";
+span.className = "bg-gradient-to-r from-amber-100 to-amber-50 bg-clip-text text-transparent";
+
+  text.appendChild(span);
+});
+
+  tl.from(
+    text.querySelectorAll("span"),
+    {
+      opacity: 0,
+      delay:1,
+      y: 20,
+      duration: 0.6,
+      stagger: 0.05,
+      ease: "power2.out",
+    },
+    "-=0.6"
+  );
+
+  // Paragraph fade/slide
+  tl.from(
+    paraRef.current,
+    {
+      opacity: 0,
+      y: -20,
+      duration: 0.8,
+      ease: "power2.out",
+    },
+    "-=0.5"
+  );
+
+  // Button entrance
+  gsap.set(buttonRef.current, { opacity: 0, scale: 0.75 }); // <- set initial state instantly
+tl.to(buttonRef.current, {
+  opacity: 1,
+  scale: 1,
+  duration: 0.6,
+  ease: "back.out(1.7)",
+}, "-=0.4");
+
+tl.from(
+    waveRef.current,
+    {
+      opacity: 0,
+      y: 20,
+      duration: 2,
+      ease: "power2.out",
+    },
+    "-=0.5"
+  );
+
+  return () => tl.kill();
+}, []);
+
+
   return (
     <>
-      {/* HERO SECTION */}
-      <div className="relative w-full h-screen overflow-hidden">
-        {/* Background Video */}
+      <div  className="relative w-full h-screen overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
           autoPlay
@@ -18,23 +106,27 @@ export default function HeroSection() {
           <source src={heroVideo} type="video/mp4" />
         </video>
 
-        {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/40 z-10" />
 
-        {/* Content */}
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6">
-          <h1 className="text-4xl md:text-5xl font-merienda text-white mb-4">
-            Welcome to Weekend Homes Resort
-          </h1>
+ 
 
-          <p className="text-lg font-cinzel md:text-2xl text-gray-200">
-            Your luxury escape into nature 🌴
-          </p>
+ <h1 ref={headingRef} className="text-4xl md:text-5xl font-merienda mb-4 text-center ">
+  Coconut Beach Farm By{" "}
+  <span className="bg-gradient-to-r from-amber-300 to-amber-100 bg-clip-text text-transparent">
+    Weekend Homes
+  </span>
+</h1>
 
-          <a
-            href="#contact"
-            className="mt-8 relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white transition duration-300 ease-out border-2 border-white rounded-full group"
-          >
+  <p ref={paraRef} className="hero-subtext text-lg font-fred md:text-2xl text-gray-200">
+    Alibaug 
+  </p>
+
+  <a
+  ref={buttonRef}
+  href="#contact"
+  className="hero-button opacity-0 scale-75 mt-8 relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white transition duration-300 ease-out border-2 border-white rounded-full group"
+>
             <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease">
               <svg
                 className="w-6 h-6 text-black"
@@ -57,13 +149,15 @@ export default function HeroSection() {
           </a>
         </div>
       </div>
-      <div className="absolute left-0 bottom-[0] z-50">
-  <svg
-    preserveAspectRatio="xMidYMax meet"
-    viewBox="0 0 1600 200"
-    className="w-full h-[300px] block"
-  >
-    <path
+
+      {/* SVG Wave Animation */}
+      <div ref={waveRef} className="hero-wave absolute left-0 bottom-[0] z-10">
+        <svg
+          preserveAspectRatio="xMidYMax meet"
+          viewBox="0 0 1600 200"
+          className="w-full h-[300px] block"
+        >
+          <path
       fill="#fff"
       d="M-16,129.803C28.268,129.803,43.874,86,74.839,86 c26.605,0,15.874,35.884-0.894,27.723c8.831,0,8.943-12.52,0.894-12.52c-12.967,0-9.167,38.455,26.829,38.455s1.409,0,1.409,0 v16.097H-16V129.803z"
     />
@@ -97,14 +191,8 @@ export default function HeroSection() {
     V142.333
     z"
 />
-
-  </svg>
-  
-  
-</div>
-    
-
-    
+        </svg>
+      </div>
     </>
   );
 }

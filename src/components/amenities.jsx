@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import "swiper/css";
@@ -12,6 +12,10 @@ import {
 } from 'react-icons/fa';
 import { MdOutlineRestaurant, MdOutdoorGrill, MdGames, MdSecurity } from 'react-icons/md';
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const amenities = [
@@ -46,20 +50,61 @@ for (let i = 0; i < amenities.length; i += 8) {
   slideChunks.push(amenities.slice(i, i + 8));
 }
 
+
 export default function AmenitiesSection() {
+
+    const headingRef = useRef(null);
+    const boxRef = useRef(null);
+
+useEffect(() => {
+  gsap.fromTo(
+    headingRef.current,
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: headingRef.current,
+        start: "top 80%", // when h2 top hits 80% of viewport height
+        scrub:2,
+        toggleActions: "play none none none",
+      },
+    }
+  );
+
+   gsap.fromTo(
+    boxRef.current,
+    { opacity: 0, y: 30 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 2,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: boxRef.current,
+        start: "top 100%", // when h2 top hits 80% of viewport height
+        scrub:2,
+        toggleActions: "play none none none",
+      },
+    }
+  );
+}, []);
+
   return (
-    <section
+    <section id="amenities"
       className="md:p-10 p-6"
       style={{
         background: "linear-gradient(355deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)",
       }}
     >
-      <h2 className="text-4xl font-extrabold text-center mb-10 text-gray-800">
+      <h2  ref={headingRef} className="text-4xl font-extrabold text-center mb-10 text-gray-800">
         Amenities & Facilities
       </h2>
 
       {/* Desktop View */}
-      <div className="hidden md:block relative z-10 max-w-[90%] mx-auto">
+      <div ref={boxRef} className="hidden md:block relative z-10 max-w-[90%] mx-auto">
         {/* Background Image and Overlay */}
         <div
           className="relative py-16 px-4 sm:px-6 lg:px-14 bg-cover bg-center rounded-3xl"
@@ -70,10 +115,10 @@ export default function AmenitiesSection() {
           <div className="absolute inset-0 rounded-3xl bg-black/20 z-0" />
 
           {/* Navigation Buttons */}
-          <button className="swiper-button-prev-custom absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 text-[#00bcd4] hover:text-[#0284c7] rounded-full p-2 shadow-md text-2xl">
+          <button className="swiper-button-prev-custom absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/30 text-[#00bcd4] hover:text-[#0284c7] rounded-full p-2 shadow-md text-2xl">
             <HiChevronLeft />
           </button>
-          <button className="swiper-button-next-custom absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 text-[#00bcd4] hover:text-[#0284c7] rounded-full p-2 shadow-md text-2xl">
+          <button className="swiper-button-next-custom absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/30 text-[#00bcd4] hover:text-[#0284c7] rounded-full p-2 shadow-md text-2xl">
             <HiChevronRight />
           </button>
 
