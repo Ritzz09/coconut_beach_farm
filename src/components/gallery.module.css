@@ -1,67 +1,84 @@
 .galleryWrapper {
-  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(180deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%);
+  color: white;
   overflow: hidden;
-  background-color: aliceblue;
 }
-
-.container {
-  width: 100%;
-  position: relative;
-}
-
 
 .heading {
-  font-size: 14rem;
-  font-family: 'merienda', cursive;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  margin: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  background: linear-gradient(42deg, rgba(220, 239, 245, 1) 0%, rgba(91, 199, 235, 1) 50%, rgba(220, 239, 245, 1) 100%);
+  font-size: 3rem;
+  text-align: center;
+  font-family: 'Merienda', cursive;
+  margin-bottom: 4rem;
+  background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text; /* For Firefox */
   color: transparent;
+}
+.rowWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  will-change: transform;
+}
+
+.row {
+  display: flex;
+  gap: 2rem;
+  will-change: transform;
+}
+
+.image {
+  flex-shrink: 0;
+  width: 300px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.08) rotate(1deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .image {
+    width: 200px;
+    height: 130px;
+  }
+
+  .heading {
+    font-size: 2.2rem;
+  }
 }
 
 @media (max-width: 768px) {
+  .image {
+    width: 200px;
+    height: 150px;
+  }
+
+  .rowWrapper {
+    gap:1rem;
+  }
+
   .heading {
-    font-size: 5rem;
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .heading {
-    font-size: 3.5rem;
+  .image {
+    width: 150px;
+    height: 100px;
   }
-}
 
-
-
-
-.gallerySection {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  justify-content: center;
-  align-items: center;
-  padding: 8rem 2rem;
-  background: linear-gradient(180deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%);
-}
-
-.img {
-  width: 80vw;
-  height: 60vh;
-  background-size: cover;
-  background-position: center;
-  border-radius: 1rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transform: translateY(100px);
-  z-index: 1;
+  .heading {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
 }
