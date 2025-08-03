@@ -106,12 +106,12 @@ tl.from(
           <source src={heroVideo} type="video/mp4" />
         </video>
 
-        <div className="absolute inset-0 bg-black/40 z-10" />
+        {/* <div className="absolute inset-0 bg-black/40 z-10" /> */}
 
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6">
  
 
- <h1 ref={headingRef} className="text-4xl md:text-5xl font-merienda mb-4 text-center ">
+ <h1 ref={headingRef} className="text-3xl md:text-5xl font-merienda mb-4 text-center ">
   Coconut Beach Farm By{" "}
   <span className="bg-gradient-to-r from-amber-300 to-amber-100 bg-clip-text text-transparent">
     Weekend Homes

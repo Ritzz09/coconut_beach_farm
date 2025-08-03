@@ -3,11 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@800&display=swap');
 
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@800..900&family=Fredericka+the+Great&display=swap');
 
-html {
-  scroll-behavior: smooth;
-}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
 
 .font-merienda {
   font-family: 'Merienda', cursive;
@@ -17,12 +20,22 @@ html {
     font-family: 'Cinzel' , serif;
 }
 
+.font-bebas {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
 .font-fred {
   font-family: "Fredericka the Great", serif;
   font-weight: 400;
   /* font-style: normal; */
 }
 
+  .font-playfair {
+    font-family: "Playfair Display", 'serif';
+  }
+
+
 .h1{
   color: #ffffffb2;
 }
+

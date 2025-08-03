@@ -13,6 +13,8 @@ import {
 import { MdOutlineRestaurant, MdOutdoorGrill, MdGames, MdSecurity } from 'react-icons/md';
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -96,70 +98,98 @@ useEffect(() => {
     <section id="amenities"
       className="md:p-10 p-6"
       style={{
-        background: "linear-gradient(355deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)",
+        background: "linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)",
       }}
     >
-      <h2  ref={headingRef} className="text-4xl font-extrabold text-center mb-10 text-gray-800">
+      <h2  ref={headingRef} className="text-4xl font-merienda font-extrabold text-center mb-10 text-gray-800">
         Amenities & Facilities
       </h2>
 
       {/* Desktop View */}
       <div ref={boxRef} className="hidden md:block relative z-10 max-w-[90%] mx-auto">
-        {/* Background Image and Overlay */}
-        <div
-          className="relative py-16 px-4 sm:px-6 lg:px-14 bg-cover bg-center rounded-3xl"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80')`,
-          }}
-        >
-          <div className="absolute inset-0 rounded-3xl bg-black/20 z-0" />
+  <div
+    className="relative py-16 px-4 sm:px-6 lg:px-14 bg-cover bg-center rounded-3xl"
+    style={{
+      backgroundImage: `linear-gradient(to top right, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80')`,
+    }}
+  >
+    <div className="absolute inset-0 rounded-3xl bg-black/30 z-0 backdrop-blur-sm" />
 
-          {/* Navigation Buttons */}
-          <button className="swiper-button-prev-custom absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/30 text-[#00bcd4] hover:text-[#0284c7] rounded-full p-2 shadow-md text-2xl">
-            <HiChevronLeft />
-          </button>
-          <button className="swiper-button-next-custom absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/30 text-[#00bcd4] hover:text-[#0284c7] rounded-full p-2 shadow-md text-2xl">
-            <HiChevronRight />
-          </button>
+    {/* Navigation Buttons */}
+    <button className="swiper-button-prev-custom absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/30 text-[#00bcd4] hover:text-[#0284c7] rounded-full p-2 shadow-md text-2xl transition-transform duration-300 hover:scale-110">
+      <HiChevronLeft />
+    </button>
+    <button className="swiper-button-next-custom absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/30 text-[#00bcd4] hover:text-[#0284c7] rounded-full p-2 shadow-md text-2xl transition-transform duration-300 hover:scale-110">
+      <HiChevronRight />
+    </button>
 
-          {/* Swiper with Just Cards */}
-          <div className="relative z-10">
-            <Swiper
-              modules={[Navigation, Pagination]}
-              navigation={{
-                nextEl: ".swiper-button-next-custom",
-                prevEl: ".swiper-button-prev-custom",
-              }}
-              pagination={{
-                el: ".swiper-pagination-custom",
-                clickable: true,
-              }}
-              spaceBetween={30}
-            >
-              {slideChunks.map((group, idx) => (
-                <SwiperSlide key={idx}>
-                  <div className="grid grid-cols-4 gap-6">
-                    {group.map((item, i) => (
-                      <AmenityCard key={i} icon={item.icon} name={item.name} />
-                    ))}
-                  </div>
-                </SwiperSlide>
+    {/* Animated Heading */}
+
+
+    {/* Swiper */}
+    <div className="relative z-10">
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation={{
+          nextEl: ".swiper-button-next-custom",
+          prevEl: ".swiper-button-prev-custom",
+        }}
+        pagination={{
+          el: ".swiper-pagination-custom",
+          clickable: true,
+        }}
+        spaceBetween={30}
+      >
+        {slideChunks.map((group, idx) => (
+          <SwiperSlide key={idx}>
+            <div className="grid grid-cols-4 gap-6">
+              {group.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                >
+                  <AmenityCard icon={item.icon} name={item.name} />
+                </motion.div>
               ))}
-            </Swiper>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
 
-            
-          </div>
-          
-        </div>
-        <div className="swiper-pagination-custom mt-6 flex justify-center gap-2" />
-      </div>
+    {/* Swipe hint for mobile */}
+    <div className="text-white text-center mt-4 md:hidden animate-pulse text-sm">
+      ← Swipe →
+    </div>
+  </div>
+</div>
+
 
       {/* Mobile Scroll */}
-      <div className="md:hidden flex overflow-x-auto gap-4 relative z-10 py-6 px-2">
-        {amenities.map((item, i) => (
-          <AmenityCard key={i} icon={item.icon} name={item.name} mobile />
-        ))}
-      </div>
+     {/* Mobile Horizontal Scroll with Snap */}
+<div className="md:hidden px-2 py-4">
+  <div className="flex gap-4 overflow-x-auto scroll-snap-x snap-x snap-mandatory scrollbar-hide">
+    {amenities.map((item, i) => (
+  <div
+    key={i}
+    className="snap-center flex-shrink-0 w-[100%] bg-gradient-to-br from-black/10 to-black/5 backdrop-blur-lg border border-black/20 rounded-xl p-5 text-black shadow-md hover:scale-105 transition-transform duration-300 ease-in-out mb-2"
+  >
+    {/* Inline layout for icon + text */}
+    <div className="flex items-center gap-3">
+      <div className="text-3xl text-[#00d4ff]">{item.icon}</div>
+      <p className="font-semibold text-lg">{item.name}</p>
+    </div>
+  </div>
+))}
+
+  </div>
+
+  {/* Optional Scroll Hint */}
+  <p className="text-black text-sm mt-2 text-center opacity-60">← Swipe for more amenities →</p>
+</div>
+
     </section>
   );
 }
