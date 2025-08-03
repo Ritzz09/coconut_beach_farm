@@ -70,14 +70,14 @@ export default function Navbar() {
       className={clsx(
         "nav-item group flex items-center gap-2 text-lg font-semibold transition-colors",
         activeSection === item.name
-          ? "text-yellow-300"
-          : "text-white hover:text-yellow-300"
+          ? "text-sky-300"
+          : "text-white hover:text-sky-300"
       )}
       whileHover={{ scale: 1.05 }}
     >
       <span className="text-xl">{item.icon}</span>
       {item.name}
-      <span className="block h-0.5 w-0 group-hover:w-full bg-yellow-300 transition-all duration-300"></span>
+      <span className="block h-0.5 w-0 group-hover:w-full bg-sky-300 transition-all duration-300"></span>
     </motion.a>
   ))}
 </div>

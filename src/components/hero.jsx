@@ -39,7 +39,7 @@ const span = document.createElement("span");
 span.textContent = char;
 span.style.display = "inline-block";
 span.style.whiteSpace = char === " " ? "pre" : "normal";
-span.className = "bg-gradient-to-r from-amber-100 to-amber-50 bg-clip-text text-transparent";
+span.className = "bg-gradient-to-tr from-[#dceff5] via-[#5bc7eb] to-[#dceff5] bg-clip-text text-transparent";
 
   text.appendChild(span);
 });
@@ -113,7 +113,7 @@ tl.from(
 
  <h1 ref={headingRef} className="text-3xl md:text-5xl font-merienda mb-4 text-center ">
   Coconut Beach Farm By{" "}
-  <span className="bg-gradient-to-r from-amber-300 to-amber-100 bg-clip-text text-transparent">
+  <span className="bg-gradient-to-tr from-[#dceff5] via-[#5bc7eb] to-[#dceff5] bg-clip-text text-transparent">
     Weekend Homes
   </span>
 </h1>
@@ -127,9 +127,9 @@ tl.from(
   href="#contact"
   className="hero-button opacity-0 scale-75 mt-8 relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white transition duration-300 ease-out border-2 border-white rounded-full group"
 >
-            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease">
+            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-white/30 group-hover:translate-x-0 ease">
               <svg
-                className="w-6 h-6 text-black"
+                className="w-6 h-6 text-sky-400"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"

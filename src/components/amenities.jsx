@@ -110,8 +110,8 @@ useEffect(() => {
   <div
     className="relative py-16 px-4 sm:px-6 lg:px-14 bg-cover bg-center rounded-3xl"
     style={{
-      backgroundImage: `linear-gradient(to top right, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80')`,
-    }}
+    background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+  }}
   >
     <div className="absolute inset-0 rounded-3xl bg-black/30 z-0 backdrop-blur-sm" />
 
