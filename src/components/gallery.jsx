@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
-import styles from "./Gallery.module.css";
+import styles from "./gallery.module.css";
 
 import img1 from "../assets/gallery/1.jpeg";
 import img2 from "../assets/gallery/2.jpeg";
