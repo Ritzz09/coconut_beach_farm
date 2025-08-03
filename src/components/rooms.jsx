@@ -47,7 +47,7 @@ const ImageBlock = ({ title, image }) => {
 
           {/* Brush Mask */}
           <motion.div
-            className="absolute top-0 left-0 w-full h-full bg-neutral-950 z-10"
+            className="absolute top-0 left-0 w-full h-full bg-slate-950 z-10"
             style={{ x: maskX }}
           />
         </motion.div>
@@ -105,6 +105,37 @@ const FramerScrollReveal = () => {
     background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
   }}
 />
+{/* <div className="absolute inset-0 z-5 pointer-events-none">
+  <svg
+    className="absolute top-0 left-0 w-full h-full opacity-20"
+    viewBox="0 0 800 800"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <circle cx="400" cy="400" r="300" fill="aqua" opacity="0.2">
+      <animate
+        attributeName="r"
+        values="300;350;300"
+        dur="8s"
+        repeatCount="indefinite"
+      />
+    </circle>
+  </svg>
+</div> */}
+<div className="absolute inset-0 z-0 overflow-hidden">
+  {[...Array(500)].map((_, i) => (
+    <div
+      key={i}
+      className="absolute bg-white rounded-full"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        width: "3px",
+        height: "3px",
+        animation: `twinkle ${Math.random() * 3 + 2}s infinite ease-in-out`,
+      }}
+    />
+  ))}
+</div>
 
   {/* Black Overlay */}
   <div className="absolute inset-0 bg-black opacity-50 z-10"></div>

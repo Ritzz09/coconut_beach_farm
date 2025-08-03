@@ -90,6 +90,7 @@ const Gallery = () => {
               style={{ backgroundImage: `url(${url})` }}
             />
           ))}
+
         </section>
       </div>
     </div>

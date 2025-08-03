@@ -63,4 +63,5 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   opacity: 0;
   transform: translateY(100px);
+  z-index: 1;
 }
