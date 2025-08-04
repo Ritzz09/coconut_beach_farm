@@ -1,5 +1,5 @@
 .galleryWrapper {
-  padding: 1rem 2rem;
+  padding: 2rem 2rem 6rem 2rem;
   background: linear-gradient(180deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%);
   color: white;
   overflow: hidden;
