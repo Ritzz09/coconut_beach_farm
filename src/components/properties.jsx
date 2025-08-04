@@ -132,14 +132,14 @@ export default function Properties() {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-slate-950/70 to-transparent rounded-2xl" />
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <h1 className="text-white text-4xl md:text-6xl font-bold text-center">
+                                        <h1 className="text-white text-4xl md:text-6xl font-bold text-center p-4">
                                             {["Golden Dreams", "Sai Bungalow", "Golden Bells", "Madhuban Bungalow"][i]}
                                         </h1>
                                     </div>
                                     <div className="absolute bottom-6 left-6">
-                                        <p className="text-white text-lg md:text-xl font-medium">
-                                            A luxury experience like no other
-                                        </p>
+                                         <p className="text-white text-2xl font-semibold">
+                                        {["A luxury", "experience", "like", "no other"][i]}
+                                    </p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -211,7 +211,7 @@ export default function Properties() {
                                 {/* Subheading (bottom-left) */}
                                 <div className="absolute bottom-6 left-6">
                                     <p className="text-white text-lg font-medium">
-                                        A luxury experience like no other
+                                        {["A luxury", "experience", "like", "no other"][index]}
                                     </p>
                                 </div>
                             </motion.div>
