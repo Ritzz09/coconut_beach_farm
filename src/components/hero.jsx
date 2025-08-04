@@ -54,7 +54,7 @@ export default function HeroSection() {
       span.textContent = char;
       span.style.display = "inline-block";
       span.style.whiteSpace = char === " " ? "pre" : "normal";
-      span.className = "text-[#5bc7eb]";
+      span.className = "text-[#5bc7eb] md:text-4xl text-2xl";
       subSpan.appendChild(span);
     });
 
@@ -120,7 +120,7 @@ export default function HeroSection() {
 
   return (
     <>
-      <div className="relative w-full h-screen overflow-hidden">
+      <div id="home" className="relative w-full h-screen overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
           autoPlay
@@ -243,7 +243,7 @@ export default function HeroSection() {
       </div>
 
       {/* SVG Wave Animation */}
-      <div ref={waveRef} className="hero-wave absolute left-0 bottom-[0] z-10">
+      <div ref={waveRef} className="hero-wave hidden md:block absolute left-0 bottom-[0] z-10">
         <svg
           preserveAspectRatio="xMidYMax meet"
           viewBox="0 0 1600 200"

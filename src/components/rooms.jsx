@@ -66,7 +66,7 @@ const FramerScrollReveal = () => {
   ];
 
   return (
-    <main className="relative bg-neutral-950 text-white overflow-hidden">
+    <main id="rooms" className="relative bg-neutral-950 text-white overflow-hidden">
 
   {/* Top Blob Divider */}
   <div className="relative z-30">

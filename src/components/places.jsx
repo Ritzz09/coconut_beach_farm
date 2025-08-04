@@ -20,7 +20,9 @@
     ];
 
     return (
-        <div className="relative">
+        <div id="places" style={{
+                background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+            }} className="relative">
         {/* Top Slanted Divider */}
         <svg
             className="absolute top-0 left-0 w-full h-12 md:h-24 rotate-180 z-10"
@@ -55,9 +57,7 @@
             {/* Background Gradient */}
             <div
             className="absolute inset-0 z-[-1]"
-            style={{
-                background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-            }}
+            
             />
 
             {/* Content */}

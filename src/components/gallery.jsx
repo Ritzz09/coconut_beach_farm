@@ -16,7 +16,7 @@ const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
 
 const Gallery = () => {
   return (
-    <div className={styles.galleryWrapper}>
+    <div id="gallery" className={styles.galleryWrapper}>
       <h1 className={styles.heading}>Gallery</h1>
 
       <div className={styles.rowWrapper}>

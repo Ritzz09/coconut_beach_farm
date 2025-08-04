@@ -6,6 +6,8 @@ import AmenitiesSection from "./src/components/amenities";
 import ScrollImageReveal from "./src/components/rooms";
 import Gallery from "./src/components/gallery";
 import Places from "./src/components/places";
+import Properties from "./src/components/properties";
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
       <ScrollImageReveal />
       <Gallery />
       <Places />
+      <Properties/>
     </>
   );
 }
