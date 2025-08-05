@@ -56,3 +56,16 @@ html {
 .swiper-pagination-bullet-active {
   @apply scale-125 bg-white shadow-inner shadow-black;
 }
+
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spinSlow 8s linear infinite;
+}

@@ -97,8 +97,6 @@ const FramerScrollReveal = () => {
     </motion.div>
   </div>
 
-  {/* Background Image */}
-
   <div
   className="absolute inset-0 bg-cover bg-center z-0"
   style={{

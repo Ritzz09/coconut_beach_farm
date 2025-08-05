@@ -54,11 +54,6 @@
             {/* Black Overlay */}
             <div className="absolute inset-0 bg-black opacity-50 z-0" />
 
-            {/* Background Gradient */}
-            <div
-            className="absolute inset-0 z-[-1]"
-            
-            />
 
             {/* Content */}
             <div className="relative z-10 w-full mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-12">

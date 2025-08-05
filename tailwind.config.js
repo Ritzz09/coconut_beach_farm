@@ -10,6 +10,9 @@ export default {
       fontFamily: {
         merienda: ['"Merienda"', 'cursive'],
       },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
+      },
     },
   },
   plugins: [],

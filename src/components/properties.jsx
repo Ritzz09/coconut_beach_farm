@@ -128,11 +128,11 @@ export default function Properties() {
                                     <img
                                         src={img}
                                         alt={`Property ${i + 1}`}
-                                        className="w-full h-full object-cover rounded-2xl border-5 border-white/70"
+                                        className="w-full h-full object-cover rounded-2xl border-5 border-[#E5F4FA]"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-slate-950/70 to-transparent rounded-2xl" />
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <h1 className="text-white text-4xl md:text-6xl font-bold text-center p-4">
+                                        <h1 className="text-[#BCDCE8] text-4xl md:text-6xl font-bold text-center p-4">
                                             {["Golden Dreams", "Sai Bungalow", "Golden Bells", "Madhuban Bungalow"][i]}
                                         </h1>
                                     </div>
