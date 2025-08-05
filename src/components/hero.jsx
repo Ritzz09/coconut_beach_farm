@@ -45,7 +45,7 @@ export default function HeroSection() {
       span.textContent = char;
       span.style.display = "inline-block";
       span.style.whiteSpace = char === " " ? "pre" : "normal";
-      span.className = "text-white";
+      span.className = "text-[#5bc7eb]";
       mainSpan.appendChild(span);
     });
 
@@ -54,7 +54,7 @@ export default function HeroSection() {
       span.textContent = char;
       span.style.display = "inline-block";
       span.style.whiteSpace = char === " " ? "pre" : "normal";
-      span.className = "text-[#5bc7eb] md:text-4xl text-2xl";
+      span.className = "text-white md:text-4xl text-2xl";
       subSpan.appendChild(span);
     });
 
@@ -134,7 +134,7 @@ export default function HeroSection() {
         {/* Sidebar Button */}
         <button
           onClick={() => setShowForm(true)}
-          className="fixed md:top-1/2 top-3/4 right-0 z-40 bg-slate-900/80  text-xl md:text-2xl  text-white/80 md:px-4 md:py-4 px-2 py-2 font-cinzel rounded-l-md shadow-md transform -translate-y-1/2 hover:bg-white/70 hover:text-slate-900 transition"
+          className="fixed md:top-1/2 top-3/4 right-0 z-100 bg-slate-900/80  text-xl md:text-2xl  text-white/80 md:px-4 md:py-4 px-2 py-2 font-cinzel rounded-l-md shadow-md transform -translate-y-1/2 hover:bg-white/70 hover:text-slate-900 transition"
         >
           Contact Us
         </button>
@@ -142,7 +142,7 @@ export default function HeroSection() {
         {/* Contact Form Slide-in */}
         {showForm && (
 <div
-  className={`fixed top-10 right-0 h-[90%] w-full md:w-[400px] z-50 bg-slate-900/70 backdrop-blur-md p-6 md:p-8 shadow-2xl border-l-[6px] border-slate-950 rounded-l-[30px] text-white transition-transform duration-500 ease-in-out ${
+  className={`fixed top-10 right-0 h-[90%] w-full md:w-[400px] z-120 bg-slate-900/70 backdrop-blur-md p-6 md:p-8 shadow-2xl border-l-[6px] border-slate-950 rounded-l-[30px] text-white transition-transform duration-500 ease-in-out ${
     showForm ? 'translate-x-0' : 'translate-x-full'
   }`}
 >
@@ -177,13 +177,7 @@ export default function HeroSection() {
           <option className="text-slate-900" value="panchgani">Panchgani</option>
           <option className="text-slate-900" value="lonavala">Lonavala</option>
         </select>
-        <select
-          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
-        >
-          <option className="text-slate-900" value="">Select Bungalow</option>
-          <option className="text-slate-900" value="bungalow1">Bungalow 1</option>
-          <option className="text-slate-900" value="bungalow2">Bungalow 2</option>
-        </select>
+        
         <textarea
           placeholder="Message here.."
           rows="3"
@@ -204,7 +198,7 @@ export default function HeroSection() {
         )}
 
         {/* HERO CONTENT */}
-        <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6">
+        <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center md:px-6 px-3">
           <h1 ref={headingRef} className="text-3xl md:text-6xl font-merienda mb-4 text-center leading-snug"></h1>
 
           <p

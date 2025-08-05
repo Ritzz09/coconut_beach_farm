@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaHome, FaHotel, FaImages, FaMonument, FaBars, FaTimes } from "react-icons/fa";
+import { FaHome, FaHotel, FaImages, FaMonument, FaBars, FaTimes, FaPhoneAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import gsap from "gsap";
@@ -17,10 +17,11 @@ export default function Navbar() {
   const menuRef = useRef(null);
 
   const sections = [
-    { name: "Home", icon: <FaHome />, href: "#home" },
     { name: "Rooms", icon: <FaHotel />, href: "#rooms" },
     { name: "Gallery", icon: <FaImages />, href: "#gallery" },
     { name: "Places to visit", icon: <FaMonument />, href: "#places" },
+      { name: "Properties", icon: <FaHome />, href: "#properties" },
+    { name: "contact", icon: <FaPhoneAlt  />, href: "#contact" },
   ];
 
   useLayoutEffect(() => {
@@ -69,7 +70,7 @@ export default function Navbar() {
     <nav
       ref={navbarRef}
       className={clsx(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
+        "fixed top-0 left-0 w-full z-150 transition-all duration-300",
         scrolled ? "bg-slate-950/40 shadow-md" : "bg-transparent"
       )}
     >

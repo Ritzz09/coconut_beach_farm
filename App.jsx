@@ -14,7 +14,6 @@ import Footer from "./src/components/footer";
 
 
 
-
 function App() {
   useEffect(() => {
   AOS.init({
@@ -32,6 +31,7 @@ function App() {
       <Places />
       <Properties/>
       {/* <BlogSlider /> */}
+
       <Footer />
     </>
   );

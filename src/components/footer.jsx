@@ -6,7 +6,7 @@ import logo from "../assets/mobile_logo.png";
 export default function Footer() {
     return (
         <footer
-            className="relative text-white pb-10" 
+            className="relative text-white pb-10 "
             style={{
                 background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
             }}
@@ -29,7 +29,7 @@ export default function Footer() {
             <div className="absolute inset-0 bg-black/60 z-20"></div>
 
             {/* Footer Content */}
-            <div className="relative z-30 container mx-auto px-6 md:px-12 lg:px-10">
+            <div className="relative z-30 container mx-auto px-6 md:px-12 lg:px-10 lg:mt-[280px] mt-[300px]">
                 <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-20 text-white text-base">
                     {/* Column 1: Company Info */}
                     <div className="flex flex-col justify-center items-center text-center px-2" data-aos="fade-up">
@@ -66,22 +66,27 @@ export default function Footer() {
                                 <FaPhoneAlt /> +91 98765 43210
                             </li>
                             <li className="flex items-center justify-center gap-2">
-                                <MdEmail /> hello@coconutbeachfarm.com
+                                <a href="mailto:seexpert111@gmail.com" className="flex items-center gap-2">
+                                    <MdEmail /> info@digital.com
+                                </a>
                             </li>
+
                         </ul>
                     </div>
 
                     {/* Column 5: Location Map */}
                     <div className="flex flex-col justify-center items-center text-center px-2" data-aos="zoom-in" data-aos-delay="400">
                         <h3 className="text-2xl font-merienda font-semibold mb-4">Location</h3>
-                        <div className="w-full h-52">
+                        <div className="w-full h-full">
                             <iframe
-                                title="Map"
-                                src="https://maps.google.com/maps?q=Alibaug%2C%20Maharashtra&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                className="w-full h-full border-0 rounded-md hover:scale-110"
-                                loading="lazy"
-                                data-aos="zoom-in"
-                            ></iframe>
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.7661704452694!2d72.9017083!3d18.613075599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be87a9fa94d3c07%3A0x5b4b17ff34289dc4!2sCoconut%20Beach%20Farm%20Resorts%20in%20Alibaug%20Beach%20Maharashtra!5e1!3m2!1sen!2sin!4v1754425136387!5m2!1sen!2sin"
+    width="100%"
+    height="100%"
+    style={{ border: 0 }}
+    allowFullScreen="true"
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  ></iframe>
                         </div>
                     </div>
                 </div>

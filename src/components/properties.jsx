@@ -90,7 +90,7 @@ export default function Properties() {
 
     return (
         <section id="properties"
-            className="md:py-10 "
+            className="md:py-10  "
             style={{
                 background: "linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)",
             }}
@@ -107,13 +107,13 @@ export default function Properties() {
 
 
             {/* Desktop View */}
-            <div ref={boxRef} className="hidden md:block relative z-10 max-w-[95%] mx-auto">
+            <div ref={boxRef} className="hidden md:block relative z-10 max-w-[95%] mx-auto md:mb-[150px] ">
 
                 <div className="relative py-16 px-4 sm:px-6 lg:px-14 bg-cover bg-center rounded-3xl">
 
                     <div className="relative z-10">
                         <motion.div
-                            className="grid grid-cols-4 gap-6"
+                            className="grid lg:grid-cols-4 md:grid-cols-2 gap-6"
                             variants={container}
                             initial="hidden"
                             whileInView="show"
@@ -137,9 +137,9 @@ export default function Properties() {
                                         </h1>
                                     </div>
                                     <div className="absolute bottom-6 left-6">
-                                         <p className="text-white text-2xl font-semibold">
-                                        {["A luxury", "experience", "like", "no other"][i]}
-                                    </p>
+                                        <p className="text-white text-2xl font-semibold">
+                                            {["A luxury", "experience", "like", "no other"][i]}
+                                        </p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -152,10 +152,10 @@ export default function Properties() {
                     </div>
                 </div>
                 <motion.div className="relative w-full flex justify-center"
-                             initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                viewport={{ once: false, amount: 0.5 }}>
+                    initial={{ opacity: 0, y: 60 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    viewport={{ once: false, amount: 0.5 }}>
                     <a
                         href="https://weekendhome.in/index.php"
 
@@ -171,7 +171,7 @@ export default function Properties() {
 
             </div>
             {/* Mobile View */}
-            <div className="md:hidden relative z-10 px-4 pb-20">
+            <div className="md:hidden relative z-10 px-4 pb-20 mb-[200px]  ">
                 <Swiper
                     modules={[Navigation]}
                     navigation={{
@@ -243,6 +243,76 @@ export default function Properties() {
                 </div>
             </div>
 
+                    {/* Contact Form  */}
+
+            <div id="contact" className="absolute left-1/2 transform -translate-x-1/2 z-40 
+                lg:h-[600px] h-[520px] w-[90%] md:w-[80%] lg:w-[50%] 
+                bg-slate-950/80 backdrop-blur-md shadow-2xl border-2 border-white/10 
+                rounded-2xl lg:p-6 p-4 text-white transition-transform duration-500 ease-in-out md:mt-[-100px] mt-[-200px]" data-aos="zoom-in">
+                 <div className="w-full border-t-8 border-dotted border-[#dceff5] mb-4"></div>
+                <h2 className="text-3xl font-merienda text-[#dceff5] font-bold mb-6 text-center" data-aos="zoom-in" data-aos-delay="300">Get in Touch</h2>
+                <form className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div className="space-y-4">
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="400"
+                            />
+                            <input
+                                type="tel"
+                                placeholder="Phone Number"
+                                className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="500"
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="600"
+                            />
+                            <select
+                                className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="700"
+                            >
+                                <option className="text-slate-900" value="">Choose Location</option>
+                                <option className="text-slate-900" value="alibaug">Alibaug</option>
+                                <option className="text-slate-900" value="panchgani">Panchgani</option>
+                                <option className="text-slate-900" value="lonavala">Lonavala</option>
+                            </select>
+                            <input
+                                type="message"
+                                placeholder="Your message"
+                                className="w-full h-32 px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="800"
+                            />
+                            <div className="text-center">
+                                <button
+                                    type="submit"
+                                    data-aos="zoom-in" data-aos-delay="900"
+                                    className="bg-[#0F0D1D] hover:bg-[#dceff5] hover:text-[#0F0D1D] text-[#dceff5] border-1 border-white/10 font-semibold py-3 px-8 rounded-full transition duration-300"
+                                >
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="w-full h-full rounded-4xl border-2 border-white/10 p-5 md:block hidden">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.7661704452694!2d72.9017083!3d18.613075599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be87a9fa94d3c07%3A0x5b4b17ff34289dc4!2sCoconut%20Beach%20Farm%20Resorts%20in%20Alibaug%20Beach%20Maharashtra!5e1!3m2!1sen!2sin!4v1754425136387!5m2!1sen!2sin"
+                                width="100%"
+                                height="100%"
+                                allowFullScreen="true"
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                className=" rounded-4xl "
+                            ></iframe>
+                        </div>
+
+
+
+                    </div>
+                                     
+
+                </form>
+                <div className="w-full border-b-8 border-dotted border-[#0F0D1D] mt-9 "></div>
+            </div>
 
 
 
