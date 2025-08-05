@@ -36,7 +36,7 @@ const ImageBlock = ({ title, image }) => {
         </motion.div>
 
         <motion.div
-          className="md:w-[60%] w-[70%] h-[350px] relative overflow-hidden rounded-xl shadow-xl"
+          className="md:w-[60%] w-[70%] md:h-[350px] h-[250px] relative overflow-hidden rounded-xl shadow-xl"
           style={{ scale, opacity }}
         >
           {/* Image */}
@@ -103,22 +103,7 @@ const FramerScrollReveal = () => {
     background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
   }}
 />
-{/* <div className="absolute inset-0 z-5 pointer-events-none">
-  <svg
-    className="absolute top-0 left-0 w-full h-full opacity-20"
-    viewBox="0 0 800 800"
-    preserveAspectRatio="xMidYMid meet"
-  >
-    <circle cx="400" cy="400" r="300" fill="aqua" opacity="0.2">
-      <animate
-        attributeName="r"
-        values="300;350;300"
-        dur="8s"
-        repeatCount="indefinite"
-      />
-    </circle>
-  </svg>
-</div> */}
+
 <div className="absolute inset-0 z-0 overflow-hidden">
   {[...Array(500)].map((_, i) => (
     <div

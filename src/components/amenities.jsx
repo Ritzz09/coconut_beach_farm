@@ -39,7 +39,7 @@ const amenities = [
   { name: "Intercom Facility", icon: <FaPhone /> },
   { name: "TV", icon: <FaTv /> },
   { name: "First Aid Kit", icon: <FaFirstAid /> },
-  { name: "Outdoor Games: Cricket, Badminton", icon: <MdGames /> },
+  { name: "Outdoor Games", icon: <MdGames /> },
   { name: "CCTV", icon: <MdSecurity /> },
   { name: "Barbeque", icon: <MdOutdoorGrill /> },
   { name: "Bonfire", icon: <FaFire /> },
@@ -168,27 +168,26 @@ useEffect(() => {
 
 
       {/* Mobile Scroll */}
-     {/* Mobile Horizontal Scroll with Snap */}
+    {/* Mobile View Swiper: 2x2 layout */}
 <div className="md:hidden px-2 py-4">
-  <div className="flex gap-4 overflow-x-auto scroll-snap-x snap-x snap-mandatory scrollbar-hide">
-    {amenities.map((item, i) => (
-  <div
-    key={i}
-    className="snap-center flex-shrink-0 w-[100%] bg-gradient-to-br from-black/10 to-black/5 backdrop-blur-lg border border-black/20 rounded-xl p-5 text-black shadow-md hover:scale-105 transition-transform duration-300 ease-in-out mb-2"
+  <Swiper
+   
+    spaceBetween={20}
+    slidesPerView={1}
   >
-    {/* Inline layout for icon + text */}
-    <div className="flex items-center gap-3">
-      <div className="text-3xl text-[#00d4ff]">{item.icon}</div>
-      <p className="font-semibold text-lg">{item.name}</p>
-    </div>
-  </div>
-))}
-
-  </div>
-
-  {/* Optional Scroll Hint */}
+    {Array.from({ length: Math.ceil(amenities.length / 4) }, (_, idx) => (
+      <SwiperSlide key={idx}>
+        <div className="grid grid-cols-2 gap-4">
+          {amenities.slice(idx * 4, idx * 4 + 4).map((item, i) => (
+            <AmenityCard key={i} icon={item.icon} name={item.name} mobile={true} />
+          ))}
+        </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
   <p className="text-black text-sm mt-2 text-center opacity-60">← Swipe for more amenities →</p>
 </div>
+
 
     </section>
   );
@@ -198,12 +197,12 @@ useEffect(() => {
 function AmenityCard({ icon, name, mobile = false }) {
   return (
     <div
-      className={`min-w-[150px] ${mobile ? "w-[180px] flex-shrink-0" : ""}
-        bg-white/10 backdrop-blur-lg border border-white/20 
-        rounded-xl p-5 text-white shadow-md transition-all 
+      className={`min-w-[150px] ${mobile ? "w-[160px] flex-shrink-0" : ""}
+        md:bg-white/10 bg-slate-900/20 backdrop-blur-lg border border-white/20 
+        rounded-xl md:p-5 p-3 md:text-white text-slate-900 shadow-md transition-all 
         hover:scale-105 hover:shadow-xl flex items-center gap-3`}
     >
-      <div className="text-2xl text-[#00d4ff]">{icon}</div>
+      <div className="md:text-2xl text-lg md:text-[#00d4ff] text-slate-950">{icon}</div>
       <p className="font-semibold text-sm">{name}</p>
     </div>
   );

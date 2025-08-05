@@ -41,7 +41,7 @@ export default function Footer() {
                     </div>
 
                     {/* Column 2: Quick Links */}
-                    <div className="flex flex-col justify-center items-center text-center px-2" data-aos="zoom-in" data-aos-delay="100">
+                    <div className="hidden md:flex flex-col justify-center items-center text-center px-2" data-aos="zoom-in" data-aos-delay="100">
                         <h3 className="text-2xl font-merienda font-semibold mb-4">Quick Links</h3>
                         <ul className="space-y-2 text-xl font-cinzel text-gray-300">
                             <li className=" hover:scale-105"><a href="#about" className="  hover:underline">About Us</a></li>
