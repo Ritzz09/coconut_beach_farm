@@ -33,13 +33,13 @@ function App() {
   return (
     <>
       {loading ? (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center" style={{
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center " data-aos="zoom-in" data-aos-delay="200" style={{
                 background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
             }}>
           <img
             src={logo}
             alt="Loading..."
-            className="w-35 h-35 p-4  border-2 border-dashed border-white/50 rounded-full spin-slow z-100"
+            className="w-35 h-35 p-4  border-2 border-dashed border-white/50 rounded-full spin-slow z-100 " 
           />
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
