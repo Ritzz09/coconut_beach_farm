@@ -33,7 +33,7 @@ export default function HeroSection() {
       });
 
       if (res.ok) {
-        navigate("/thankyou");
+        navigate("/");
       } else {
         alert("Something went wrong.");
       }
