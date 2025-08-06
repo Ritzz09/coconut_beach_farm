@@ -66,7 +66,7 @@ export default function Properties() {
             });
 
             if (res.ok) {
-                navigate("/");
+                navigate("/thankyou");
             } else {
                 alert("Something went wrong.");
             }
@@ -292,14 +292,14 @@ export default function Properties() {
                                 type="text"
                                 placeholder="Name"
                                 name="name" onChange={handleChange} value={formData.name}
-
+                                required
                                 className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="400"
                             />
                             <input
                                 type="tel"
                                 placeholder="Phone Number"
                                 name="phone" onChange={handleChange} value={formData.phone}
-
+                                required
                                 className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="500"
                             />
                             <input

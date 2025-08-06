@@ -37,7 +37,7 @@ export default function HeroSection() {
       });
 
       if (res.ok) {
-        navigate("/");
+        navigate("/thankyou");
       } else {
         alert("Something went wrong.");
       }
@@ -201,7 +201,7 @@ export default function HeroSection() {
                 type="text"
                 name="name" onChange={handleChange} value={formData.name}
                 placeholder="Name"
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition "
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition " required
               />
               <input
                 type="email"
@@ -213,7 +213,7 @@ export default function HeroSection() {
                 type="tel"
                 name="phone" onChange={handleChange} value={formData.phone}
                 placeholder="Phone Number"
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition" required
               />
               <select
               name="location" onChange={handleChange} value={formData.location}
