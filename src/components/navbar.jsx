@@ -82,8 +82,8 @@ export default function Navbar() {
           whileHover={{ scale: 1.1 }}
           onClick={() => scrollToSection("#home", "Home")}
         >
-          <img src={logo1} className="md:hidden block  w-20  h-14" alt="Logo" />
-          <img src={logo} className="hidden md:block md:w-full w-50 md:h-15 h-8" alt="Logo" />
+          <img src={logo1} className="md:hidden block  w-20  h-14" alt="Logo" loading="lazy" />
+          <img src={logo} className="hidden md:block md:w-full w-50 md:h-15 h-8" alt="Logo" loading="lazy" />
 
         </motion.a>
 

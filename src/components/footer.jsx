@@ -57,7 +57,7 @@ export default function Footer() {
                     {/* Column 3: Center Logo */}
                     <div className="flex flex-col justify-center items-center text-center px-2" data-aos="zoom-in" data-aos-delay="200">
                         <div className="border-2 border-dashed border-white/60 p-2 rounded-full hover:scale-110 spin-slow">
-                            <img src={logo} alt="Logo" className="w-24 h-24 object-contain" />
+                            <img src={logo} alt="Logo" className="w-24 h-24 object-contain" loading="lazy" />
                         </div>
                     </div>
 

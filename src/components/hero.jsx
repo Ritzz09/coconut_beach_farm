@@ -1,8 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import heroVideo from "../assets/hero.mp4";
-import logoImg from "../assets/logo.png";
-import axios from "axios";
+
 
 import { useNavigate } from "react-router-dom";
 
@@ -166,11 +165,12 @@ export default function HeroSection() {
     <>
       <div id="home" className="relative w-full h-screen overflow-hidden">
         <video
-          className="absolute top-0 left-0 w-full h-full object-cover z-0"
+          className="absolute top-0 left-0 w-full h-full object-cover z-0 "
           autoPlay
           muted
           loop
           playsInline
+          loading="lazy"
         >
           <source src={heroVideo} type="video/mp4" />
         </video>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
+import { FaArrowUp, FaWhatsapp, FaPhoneAlt } from "react-icons/fa"; // Import icons
 import "aos/dist/aos.css";
 import Navbar from "./src/components/navbar";
 import HeroSection from "./src/components/hero";
@@ -15,7 +16,30 @@ import { Routes, Route } from "react-router-dom";
 
 import LandingPageSEO from "./src/components/landing_pageSEO";
 
+
+
 function App() {
+  const [showScroll, setShowScroll] = useState(false); // State for scroll button
+
+  useEffect(() => {
+    // Show Scroll to Top Button when scrolled down
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScroll(true);
+      } else {
+        setShowScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Scroll to Top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,8 +63,8 @@ function App() {
 
       {loading ? (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center"
-          data-aos="zoom-in"
+          className="fixed inset-0 z-[9999] flex items-center justify-center "
+          data-aos="zoom-out"
           data-aos-delay="200"
           style={{
             background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
@@ -49,11 +73,13 @@ function App() {
           <img
             src={logo}
             alt="Loading..."
+            loading="lazy"
             className="w-35 h-35 p-4 border-2 border-dashed border-white/50 rounded-full spin-slow z-100"
           />
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-3xl"></div>
         </div>
       ) : (
+        
         <>
           <Navbar />
           <HeroSection />
@@ -64,6 +90,37 @@ function App() {
           <Properties />
           {/* <BlogSlider /> */}
           <Footer />
+
+           {/* Scroll to Top Button */}
+      {showScroll && (
+        <button
+          onClick={scrollToTop}
+          className="fixed md:bottom-6 md:right-6 bottom-3 right-3 bg-slate-950 rounded-full border-2 border-sky-200 text-sky-200 p-3 shadow-lg hover:bg-white/60 transition z-50 "
+        >
+          <FaArrowUp size={30} />
+        </button>
+      )}
+
+      {/* Floating Phone & WhatsApp Buttons */}
+      <div className="fixed md:bottom-6 md:left-6 bottom-3 left-3 flex flex-col space-y-3 z-[999] rounded-full">
+        {/* Phone Button */}
+        <a
+          href="tel:+917276862000" // Replace with actual phone number
+          className="bg-slate-950 border-2 border-sky-200 text-sky-200 p-3 shadow-lg hover:bg-white/60 transition rounded-full"
+        >
+          <FaPhoneAlt size={30} />
+        </a>
+
+        {/* WhatsApp Button */}
+        <a
+          href="https://wa.me/7276862000" // Replace with actual WhatsApp number
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-slate-950 border-2 border-sky-200 text-sky-200 p-3 shadow-lg hover:bg-white/60 transition rounded-full"
+        >
+          <FaWhatsapp size={30} />
+        </a>
+      </div>
         </>
       )}
     </>

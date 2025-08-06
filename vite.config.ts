@@ -5,4 +5,10 @@ export default defineConfig({
     tailwindcss(),
   ],
   assetsInclude: ['**/*.mp4'],
+  
+   build: {
+    target: "esnext",
+    minify: "esbuild", // fastest
+    chunkSizeWarningLimit: 600, // helps identify large chunks
+  },
 })

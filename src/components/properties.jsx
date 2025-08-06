@@ -13,11 +13,9 @@ import gsap from "gsap";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-
-
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
-
 
 const container = {
     hidden: {},
@@ -41,8 +39,42 @@ const cardVariant = {
 };
 
 
-
 export default function Properties() {
+
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        location: "",
+        message: "",
+    });
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch("/api/sendEmail", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (res.ok) {
+                navigate("/");
+            } else {
+                alert("Something went wrong.");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Error sending appointment. Try again.");
+        }
+    };
 
     const headingRef = useRef(null);
     const boxRef = useRef(null);
@@ -129,6 +161,7 @@ export default function Properties() {
                                         src={img}
                                         alt={`Property ${i + 1}`}
                                         className="w-full h-full object-cover rounded-2xl border-5 border-[#E5F4FA]"
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-slate-950/70 to-transparent rounded-2xl" />
                                     <div className="absolute inset-0 flex items-center justify-center">
@@ -196,6 +229,7 @@ export default function Properties() {
                                     src={image}
                                     alt={`Slide ${index + 1}`}
                                     className="w-full h-full object-cover border-4 border-white/70 rounded-2xl"
+                                    loading="lazy"
                                 />
 
                                 {/* Gradient overlay */}
@@ -243,33 +277,41 @@ export default function Properties() {
                 </div>
             </div>
 
-                    {/* Contact Form  */}
+            {/* Contact Form  */}
 
             <div id="contact" className="absolute left-1/2 transform -translate-x-1/2 z-40 
                 lg:h-[600px] h-[550px] w-[90%] md:w-[80%] lg:w-[50%] 
                 bg-slate-950/80 backdrop-blur-md shadow-2xl border-2 border-white/10 
                 rounded-2xl lg:p-6 p-4 text-white transition-transform duration-500 ease-in-out md:mt-[-100px] mt-[-200px]" data-aos="zoom-in">
-                 <div className="w-full border-t-8 border-dotted border-[#dceff5] mb-4"></div>
+                <div className="w-full border-t-8 border-dotted border-[#dceff5] mb-4"></div>
                 <h2 className="text-3xl font-merienda text-[#dceff5] font-bold mb-6 text-center" data-aos="zoom-in" data-aos-delay="300">Get in Touch</h2>
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit} >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div className="space-y-4">
                             <input
                                 type="text"
                                 placeholder="Name"
+                                name="name" onChange={handleChange} value={formData.name}
+
                                 className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="400"
                             />
                             <input
                                 type="tel"
                                 placeholder="Phone Number"
+                                name="phone" onChange={handleChange} value={formData.phone}
+
                                 className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="500"
                             />
                             <input
                                 type="email"
                                 placeholder="Email"
+                                name="email" onChange={handleChange} value={formData.email}
+
                                 className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="600"
                             />
                             <select
+                                name="location" onChange={handleChange} value={formData.location}
+
                                 className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="700"
                             >
                                 <option className="text-slate-900" value="">Choose Location</option>
@@ -280,6 +322,8 @@ export default function Properties() {
                             <input
                                 type="message"
                                 placeholder="Your message"
+                                name="message" onChange={handleChange} value={formData.message}
+
                                 className="w-full h-32 px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="800"
                             />
                             <div className="text-center">
@@ -298,7 +342,7 @@ export default function Properties() {
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.7661704452694!2d72.9017083!3d18.613075599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be87a9fa94d3c07%3A0x5b4b17ff34289dc4!2sCoconut%20Beach%20Farm%20Resorts%20in%20Alibaug%20Beach%20Maharashtra!5e1!3m2!1sen!2sin!4v1754425136387!5m2!1sen!2sin"
                                 width="100%"
                                 height="100%"
-                                allowFullScreen="true"
+                                allowFullScreen={true}
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                                 className=" rounded-4xl "
@@ -308,7 +352,7 @@ export default function Properties() {
 
 
                     </div>
-                                     
+
 
                 </form>
                 <div className="hidden md:block w-full border-b-8 border-dotted border-[#0F0D1D] mt-9 "></div>

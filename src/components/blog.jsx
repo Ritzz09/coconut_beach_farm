@@ -240,6 +240,7 @@ const cardVariants = {
       src={blog.image}
       alt={blog.title}
       className="w-full h-60 object-cover"
+      loading="lazy"
     />
     <div className="p-5">
       <p className="text-sm text-gray-500 mb-2">{blog.category}</p>

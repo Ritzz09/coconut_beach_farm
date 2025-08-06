@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import styles from "./gallery.module.css";
 
 import img1 from "../assets/gallery/1.jpeg";
@@ -12,40 +12,69 @@ import img7 from "../assets/gallery/7.jpeg";
 import img8 from "../assets/gallery/8.jpg";
 import img9 from "../assets/gallery/9.jpeg";
 
-const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
+const row1Images = [img1, img2, img3, img1, img2, img3];
+const row2Images = [img5, img6, img7, img1, img2, img3];
+const row3Images = [img9, img4, img8, img1, img2, img3];
 
 const Gallery = () => {
+  const allRows = [row1Images, row2Images, row3Images];
+
+  // Create animation controllers per row
+  const controlsArray = allRows.map(() => useAnimation());
+
+  React.useEffect(() => {
+    controlsArray.forEach((controls, index) => {
+      const direction = index % 2 === 0 ? ["0%", "-100%"] : ["-100%", "0%"];
+      controls.start({
+        x: direction,
+        transition: {
+          repeat: Infinity,
+          ease: "linear",
+          duration: 20,
+        },
+      });
+    });
+  }, []);
+
+  const handleHover = (index, hover) => {
+    if (hover) {
+      controlsArray[index].stop(); // pause on hover
+    } else {
+      const direction = index % 2 === 0 ? ["0%", "-100%"] : ["-100%", "0%"];
+      controlsArray[index].start({
+        x: direction,
+        transition: {
+          repeat: Infinity,
+          ease: "linear",
+          duration: 20,
+        },
+      });
+    }
+  };
+
   return (
     <div id="gallery" className={styles.galleryWrapper}>
       <h1 className={styles.heading}>Gallery</h1>
 
       <div className={styles.rowWrapper}>
-        {[0, 1, 2].map((rowIndex) => {
-          const direction = rowIndex % 2 === 0 ? "left" : "right";
-          const xValues = direction === "left" ? ["0%", "-100%"] : ["-100%", "0%"];
-
-          return (
-            <div key={rowIndex} className={styles.overflow}>
-              <motion.div
-                className={styles.row}
-                animate={{ x: xValues }}
-                transition={{
-                  repeat: Infinity,
-                  ease: "linear",
-                  duration: 20,
-                }}
-              >
-                {[...images, ...images].map((img, i) => (
-                  <div
-                    key={`${rowIndex}-${i}`}
-                    className={styles.image}
-                    style={{ backgroundImage: `url(${img})` }}
-                  />
-                ))}
-              </motion.div>
-            </div>
-          );
-        })}
+        {allRows.map((rowImages, rowIndex) => (
+          <div
+            key={rowIndex}
+            className={styles.overflow}
+            onMouseEnter={() => handleHover(rowIndex, true)}
+            onMouseLeave={() => handleHover(rowIndex, false)}
+          >
+            <motion.div className={styles.row} animate={controlsArray[rowIndex]}>
+              {[...rowImages, ...rowImages].map((img, i) => (
+                <div
+                  key={`${rowIndex}-${i}`}
+                  className={styles.image}
+                  style={{ backgroundImage: `url(${img})` }}
+                />
+              ))}
+            </motion.div>
+          </div>
+        ))}
       </div>
     </div>
   );

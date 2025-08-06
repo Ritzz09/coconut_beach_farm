@@ -140,6 +140,7 @@
     src={tour.image}
     alt={tour.title}
     className="object-cover w-full h-full"
+    loading="lazy"
   />
 </div>
 
