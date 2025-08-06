@@ -4,8 +4,13 @@ import heroVideo from "../assets/hero.mp4";
 import logoImg from "../assets/logo.png";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+
 
 export default function HeroSection() {
+
+  const navigate = useNavigate();
+
    const [formData, setFormData] = useState({
     name: "",
     email: "",
