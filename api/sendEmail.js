@@ -1,49 +1,39 @@
-// server.js
-const express = require("express");
-const cors = require("cors");
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
-const app = express();
-app.use(cors());
-app.use(express.json()); // To parse JSON request body
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
 
-// POST endpoint to receive form data
-app.post("/send-email", async (req, res) => {
   const { name, email, phone, location, message } = req.body;
 
+  // Create transporter
+  const transporter = nodemailer.createTransport({
+    service: "gmail", // Change this if using another email provider
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
   try {
-    // Configure your SMTP server or Gmail credentials
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "riteshlkh2018@gmail.com", // Your email
-        pass: "ukru dwzs ausq jibd",   // Use app password if using Gmail
-      },
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: "seexpert111@gmail.com", // Change to dentist's email
+      subject: "New Enquiry",
+      text: `Details of the person contacted you are as follows:
+      
+      Name: ${name}
+      Email: ${email}
+      Mobile: ${phone}
+      Location: ${location}
+      Message: ${message}`,
     });
 
-    const mailOptions = {
-      from: email,
-      to: "seexpert111@gmail.com", // Your receiving email
-      subject: `New Enquiry for - ${location}`,
-      text: `
-        Name: ${name}
-        Email: ${email}
-        Phone: ${phone}
-        Location: ${location}
-        Message: ${message}
-      `,
-    };
-
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ success: true, message: "Email sent successfully!" });
+    return res.status(200).json({ message: "Email sent successfully" });
   } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({ success: false, message: "Failed to send email." });
+    console.error("Email sending failed:", error);
+    return res.status(500).json({ error: error.message });
   }
-});
 
-// Start the server
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+}

@@ -15,20 +15,31 @@ export default function HeroSection() {
   });
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await axios.post("/api/send-email", formData);
-      alert("Message sent successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Failed to send message.");
+      const res = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        navigate("/thankyou");
+      } else {
+        alert("Something went wrong.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error sending appointment. Try again.");
     }
   };
 
