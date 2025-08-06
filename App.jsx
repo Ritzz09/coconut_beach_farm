@@ -1,7 +1,6 @@
-// src/App.jsx
-import React, { useEffect } from "react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React, { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Navbar from "./src/components/navbar";
 import HeroSection from "./src/components/hero";
 import AmenitiesSection from "./src/components/amenities";
@@ -11,28 +10,52 @@ import Places from "./src/components/places";
 import Properties from "./src/components/properties";
 // import BlogSlider from "./src/components/blog";
 import Footer from "./src/components/footer";
-
-
+import logo from "./src/assets/mobile_logo.png";
+ // <-- replace with your logo path
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-  AOS.init({
-    duration: 1000,  // animation duration in ms
-    once: true       // whether animation should happen only once
-  });
-}, []);
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+
+    // Simulate loading delay
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // 2 seconds
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <>
-      <Navbar />
-      <HeroSection />
-      <AmenitiesSection />
-      <ScrollImageReveal />
-      <Gallery />
-      <Places />
-      <Properties/>
-      {/* <BlogSlider /> */}
-
-      <Footer />
+      {loading ? (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center" style={{
+                background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+            }}>
+          <img
+            src={logo}
+            alt="Loading..."
+            className="w-35 h-35 p-4  border-2 border-dashed border-white/50 rounded-full spin-slow z-100"
+          />
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
+      ) : (
+        <>
+          <Navbar />
+          <HeroSection />
+          <AmenitiesSection />
+          <ScrollImageReveal />
+          <Gallery />
+          <Places />
+          <Properties />
+          {/* <BlogSlider /> */}
+          <Footer />
+        </>
+      )}
     </>
   );
 }
