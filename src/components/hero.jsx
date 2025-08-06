@@ -24,7 +24,7 @@ export default function HeroSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/sendEmail", formData);
+      const res = await axios.post("/api/send-email", formData);
       alert("Message sent successfully!");
     } catch (err) {
       console.error(err);
