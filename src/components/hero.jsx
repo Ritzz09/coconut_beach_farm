@@ -2,8 +2,36 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import heroVideo from "../assets/hero.mp4";
 import logoImg from "../assets/logo.png";
+import axios from "axios";
+
 
 export default function HeroSection() {
+   const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    location: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/api/sendEmail", formData);
+      alert("Message sent successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send message.");
+    }
+  };
+
   const logoRef = useRef(null);
   const headingRef = useRef(null);
   const paraRef = useRef(null);
@@ -141,60 +169,64 @@ export default function HeroSection() {
 
         {/* Contact Form Slide-in */}
         {showForm && (
-<div
-  className={`fixed top-10 right-0 h-[90%] w-full md:w-[400px] z-200 bg-slate-900/70 backdrop-blur-md p-6 md:p-8 shadow-2xl border-l-[6px] border-slate-950 rounded-l-[30px] text-white transition-transform duration-500 ease-in-out ${
-    showForm ? 'translate-x-0' : 'translate-x-full'
-  }`}
->
-           <button
-            onClick={() => setShowForm(false)}
-            className="absolute top-2 right-3 text-white text-2xl hover:text-sky-400"
+          <div
+            className={`fixed top-10 right-0 h-[90%] w-full md:w-[400px] z-200 bg-slate-900/70 backdrop-blur-md p-6 md:p-8 shadow-2xl border-l-[6px] border-slate-950 rounded-l-[30px] text-white transition-transform duration-500 ease-in-out ${showForm ? 'translate-x-0' : 'translate-x-full'
+              }`}
           >
-            &times;
-          </button>
-      <h3 className="md:text-3xl text-2xl font-bold font-merienda mb-6 text-white/80 text-center">Contact Us</h3>
-      <form className="space-y-4">
-        <input
-          type="text"
-          placeholder="Name"
-          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
-        />
-        <input
-          type="tel"
-          placeholder="Phone Number"
-          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
-        />
-        <select
-          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
-        >
-          <option className="text-slate-900" value="">Choose Location</option>
-          <option className="text-slate-900" value="alibaug">Alibaug</option>
-          <option className="text-slate-900" value="panchgani">Panchgani</option>
-          <option className="text-slate-900" value="lonavala">Lonavala</option>
-        </select>
-        
-        <textarea
-          placeholder="Message here.."
-          rows="3"
-          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
-        ></textarea>
+            <button
+              onClick={() => setShowForm(false)}
+              className="absolute top-2 right-3 text-white text-2xl hover:text-sky-400"
+            >
+              &times;
+            </button>
+            <h3 className="md:text-3xl text-2xl font-bold font-merienda mb-6 text-white/80 text-center">Contact Us</h3>
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name" onChange={handleChange} value={formData.name}
+                placeholder="Name"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition "
+              />
+              <input
+                type="email"
+                name="email" onChange={handleChange} value={formData.email}
+                placeholder="Email"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
+              />
+              <input
+                type="tel"
+                name="phone" onChange={handleChange} value={formData.phone}
+                placeholder="Phone Number"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
+              />
+              <select
+              name="location" onChange={handleChange} value={formData.location}
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
+              >
+                <option className="text-slate-900" value="">Choose Location</option>
+                <option className="text-slate-900" value="alibaug">Alibaug</option>
+                <option className="text-slate-900" value="panchgani">Panchgani</option>
+                <option className="text-slate-900" value="lonavala">Lonavala</option>
+              </select>
 
-        <div className="flex justify-center">
-  <button
-    type="submit"
-    className="w-1/2 mt-4 bg-white/70 hover:bg-slate-600 text-slate-900 hover:text-white/80 font-bold py-2 px-6 rounded-md transition duration-300 shadow-md"
-  >
-    Send Message
-  </button>
-</div>
-         
-      </form>
-    </div>
+              <textarea
+                placeholder="Message here.."
+                name="message" onChange={handleChange} value={formData.message}
+                rows="3"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md backdrop-blur-sm placeholder-white/70 text-white focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
+              ></textarea>
+
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="w-1/2 mt-4 bg-white/70 hover:bg-slate-600 text-slate-900 hover:text-white/80 font-bold py-2 px-6 rounded-md transition duration-300 shadow-md"
+                >
+                  Send Message
+                </button>
+              </div>
+
+            </form>
+          </div>
         )}
 
         {/* HERO CONTENT */}

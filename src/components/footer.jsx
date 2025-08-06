@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebook, FaInstagram, FaPhoneAlt } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaPhoneAlt, FaYoutube, FaTwitterSquare } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import logo from "../assets/mobile_logo.png";
 
@@ -44,9 +44,12 @@ export default function Footer() {
                     <div className="hidden md:flex flex-col justify-center items-center text-center px-2" data-aos="zoom-in" data-aos-delay="100">
                         <h3 className="text-2xl font-merienda font-semibold mb-4">Quick Links</h3>
                         <ul className="space-y-2 text-xl font-cinzel text-gray-300">
-                            <li className=" hover:scale-105"><a href="#about" className="  hover:underline">About Us</a></li>
-                            <li className=" hover:scale-105"><a href="#stay" className=" hover:scale-105 hover:underline">Stay</a></li>
-                            <li className=" hover:scale-105"><a href="#gallery" className=" hover:scale-105 hover:underline">Gallery</a></li>
+                            <li className=" hover:scale-105"><a href="#" className="  hover:underline">Home</a></li>
+                            <li className=" hover:scale-105"><a href="#rooms" className=" hover:scale-105 hover:underline">Rooms</a></li>
+                            <li className=" hover:scale-105"><a href="#gallery" className=" hover:scale-105 hover:underline">Gallery    </a></li>
+                            <li className=" hover:scale-105"><a href="#places" className=" hover:scale-105 hover:underline">Places To Visit    </a></li>
+                            <li className=" hover:scale-105"><a href="#properties" className=" hover:scale-105 hover:underline">Properties    </a></li>
+
                             <li className=" hover:scale-105"><a href="#contact" className=" hover:scale-105 hover:underline">Contact</a></li>
                         </ul>
                     </div>
@@ -63,11 +66,14 @@ export default function Footer() {
                         <h3 className="text-2xl font-merienda font-semibold mb-4">Contact Us</h3>
                         <ul className="space-y-3 text-xl font-cinzel text-gray-300">
                             <li className="flex items-center justify-center gap-2">
-                                <FaPhoneAlt /> +91 98765 43210
+                                <FaPhoneAlt /> +91 72768 62000
+                            </li>
+                            <li className="flex items-center justify-center gap-2">
+                                <FaPhoneAlt /> +91 96040 37000
                             </li>
                             <li className="flex items-center justify-center gap-2">
                                 <a href="mailto:seexpert111@gmail.com" className="flex items-center gap-2">
-                                    <MdEmail /> info@digital.com
+                                    <MdEmail />  rameshdeshmukh9@gmail.com
                                 </a>
                             </li>
 
@@ -94,14 +100,29 @@ export default function Footer() {
 
                 {/* Social Icons */}
                 <div className="mt-10 flex items-center justify-center gap-6 text-xl text-white " data-aos="zoom-in" data-aos-delay="500">
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                    <a className="hover:scale-120" href="https://www.facebook.com/weekendhomes05" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+                    <a className="hover:scale-120" href="https://www.instagram.com/weekendhomes.in/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                    <a className="hover:scale-120" href="https://www.youtube.com/@weekendhomespune/" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
+                    <a className="hover:scale-120" href="https://x.com/homesweekend" target="_blank" rel="noopener noreferrer"><FaTwitterSquare /></a>
+
                 </div>
 
                 {/* Copyright */}
-                <div className="mt-12 text-center text-gray-500 text-sm border-dashed border-t border-white/70 pt-4 overflow-hidden" >
-                    © {new Date().getFullYear()} Coconut Beach Farm. All rights reserved.
-                </div>
+                <div className="mt-12 text-center text-gray-500 text-sm border-dashed border-t border-white/70 pt-4 overflow-hidden">
+  © {new Date().getFullYear()} Coconut Beach Farm. All rights reserved.
+  <div className="mt-1">
+    Designed by{" "}
+    <a
+      href="https://mastermindweb.in/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-white hover:underline"
+    >
+      MasterMind Web Developers
+    </a>
+  </div>
+</div>
+
             </div>
         </footer>
     );

@@ -21,7 +21,7 @@ export default function Navbar() {
     { name: "Gallery", icon: <FaImages />, href: "#gallery" },
     { name: "Places to visit", icon: <FaMonument />, href: "#places" },
       { name: "Properties", icon: <FaHome />, href: "#properties" },
-    { name: "contact", icon: <FaPhoneAlt  />, href: "#contact" },
+    { name: "Contact", icon: <FaPhoneAlt  />, href: "#contact" },
   ];
 
   useLayoutEffect(() => {

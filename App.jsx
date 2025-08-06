@@ -11,7 +11,9 @@ import Properties from "./src/components/properties";
 // import BlogSlider from "./src/components/blog";
 import Footer from "./src/components/footer";
 import logo from "./src/assets/mobile_logo.png";
- // <-- replace with your logo path
+
+// ✅ Import the SEO component
+import LandingPageSEO from "./src/components/landing_pageSEO";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -32,14 +34,22 @@ function App() {
 
   return (
     <>
+      {/* ✅ SEO only applies here */}
+      <LandingPageSEO />
+
       {loading ? (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center " data-aos="zoom-in" data-aos-delay="200" style={{
-                background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-            }}>
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center"
+          data-aos="zoom-in"
+          data-aos-delay="200"
+          style={{
+            background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+          }}
+        >
           <img
             src={logo}
             alt="Loading..."
-            className="w-35 h-35 p-4  border-2 border-dashed border-white/50 rounded-full spin-slow z-100 " 
+            className="w-35 h-35 p-4 border-2 border-dashed border-white/50 rounded-full spin-slow z-100"
           />
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
