@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Routes, Route } from "react-router-dom";
-
-// SEO & logo
-import LandingPageSEO from "./src/components/landing_pageSEO";
-import logo from "./src/assets/mobile_logo.png";
-
-// All components (shared or homepage)
 import Navbar from "./src/components/navbar";
 import HeroSection from "./src/components/hero";
 import AmenitiesSection from "./src/components/amenities";
@@ -15,19 +8,33 @@ import ScrollImageReveal from "./src/components/rooms";
 import Gallery from "./src/components/gallery";
 import Places from "./src/components/places";
 import Properties from "./src/components/properties";
+// import BlogSlider from "./src/components/blog";
 import Footer from "./src/components/footer";
+import logo from "./src/assets/mobile_logo.png";
+import { Routes, Route } from "react-router-dom";
+
+import LandingPageSEO from "./src/components/landing_pageSEO";
 
 function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-    const timeout = setTimeout(() => setLoading(false), 2000);
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+
+    // Simulate loading delay
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // 2 seconds
+
     return () => clearTimeout(timeout);
   }, []);
 
   return (
     <>
+      {/* ✅ SEO only applies here */}
       <LandingPageSEO />
 
       {loading ? (
@@ -49,34 +56,13 @@ function App() {
       ) : (
         <>
           <Navbar />
-
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <HeroSection />
-                  <AmenitiesSection />
-                  <ScrollImageReveal />
-                  <Gallery />
-                  <Places />
-                  <Properties />
-                </>
-              }
-            />
-
-            {/* <Route
-              path="/contact"
-              element={
-                <div className="min-h-screen flex items-center justify-center text-3xl font-bold">
-                  Contact Page
-                </div>
-              }
-            /> */}
-
-            {/* You can add more inline routes here */}
-          </Routes>
-
+          <HeroSection />
+          <AmenitiesSection />
+          <ScrollImageReveal />
+          <Gallery />
+          <Places />
+          <Properties />
+          {/* <BlogSlider /> */}
           <Footer />
         </>
       )}
