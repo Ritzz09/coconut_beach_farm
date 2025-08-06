@@ -142,13 +142,13 @@ export default function HeroSection() {
         {/* Contact Form Slide-in */}
         {showForm && (
 <div
-  className={`fixed top-10 right-0 h-[90%] w-full md:w-[400px] z-120 bg-slate-900/70 backdrop-blur-md p-6 md:p-8 shadow-2xl border-l-[6px] border-slate-950 rounded-l-[30px] text-white transition-transform duration-500 ease-in-out ${
+  className={`fixed top-10 right-0 h-[90%] w-full md:w-[400px] z-200 bg-slate-900/70 backdrop-blur-md p-6 md:p-8 shadow-2xl border-l-[6px] border-slate-950 rounded-l-[30px] text-white transition-transform duration-500 ease-in-out ${
     showForm ? 'translate-x-0' : 'translate-x-full'
   }`}
 >
            <button
             onClick={() => setShowForm(false)}
-            className="absolute top-2 right-3 text-white text-2xl hover:text-red-400"
+            className="absolute top-2 right-3 text-white text-2xl hover:text-sky-400"
           >
             &times;
           </button>

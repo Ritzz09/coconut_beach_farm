@@ -32,7 +32,7 @@ export default function Footer() {
             <div className="relative z-30 container mx-auto px-6 md:px-12 lg:px-10 lg:mt-[280px] mt-[300px]">
                 <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-20 text-white text-base">
                     {/* Column 1: Company Info */}
-                    <div className="flex flex-col justify-center items-center text-center px-2" data-aos="fade-up">
+                    <div className="flex flex-col justify-center items-center text-center px-2" data-aos="fade-up" >
                         <h2 className="text-2xl font-merienda font-bold mb-4">Coconut Beach Farm</h2>
                         <p className="text-gray-300 text-xl font-cinzel">
                             A serene getaway nestled on the shores of nature. Enjoy peaceful

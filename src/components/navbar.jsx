@@ -70,7 +70,7 @@ export default function Navbar() {
     <nav
       ref={navbarRef}
       className={clsx(
-        "fixed top-0 left-0 w-full z-150 transition-all duration-300",
+        "fixed top-0 left-0 w-full md:z-150 z-100 transition-all duration-300",
         scrolled ? "bg-slate-950/40 shadow-md" : "bg-transparent"
       )}
     >

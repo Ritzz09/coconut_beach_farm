@@ -246,7 +246,7 @@ export default function Properties() {
                     {/* Contact Form  */}
 
             <div id="contact" className="absolute left-1/2 transform -translate-x-1/2 z-40 
-                lg:h-[600px] h-[520px] w-[90%] md:w-[80%] lg:w-[50%] 
+                lg:h-[600px] h-[550px] w-[90%] md:w-[80%] lg:w-[50%] 
                 bg-slate-950/80 backdrop-blur-md shadow-2xl border-2 border-white/10 
                 rounded-2xl lg:p-6 p-4 text-white transition-transform duration-500 ease-in-out md:mt-[-100px] mt-[-200px]" data-aos="zoom-in">
                  <div className="w-full border-t-8 border-dotted border-[#dceff5] mb-4"></div>
@@ -311,7 +311,7 @@ export default function Properties() {
                                      
 
                 </form>
-                <div className="w-full border-b-8 border-dotted border-[#0F0D1D] mt-9 "></div>
+                <div className="hidden md:block w-full border-b-8 border-dotted border-[#0F0D1D] mt-9 "></div>
             </div>
 
 
