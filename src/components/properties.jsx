@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
@@ -342,7 +342,6 @@ export default function Properties() {
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.7661704452694!2d72.9017083!3d18.613075599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be87a9fa94d3c07%3A0x5b4b17ff34289dc4!2sCoconut%20Beach%20Farm%20Resorts%20in%20Alibaug%20Beach%20Maharashtra!5e1!3m2!1sen!2sin!4v1754425136387!5m2!1sen!2sin"
                                 width="100%"
                                 height="100%"
-                                allowFullScreen={true}
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                                 className=" rounded-4xl "
