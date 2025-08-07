@@ -21,18 +21,37 @@ import img16 from "../assets/gallery/16.jpeg";
 import img17 from "../assets/gallery/17.jpeg";
 import img18 from "../assets/gallery/18.jpeg";
 
-
 const row1Images = [img1, img2, img3, img4, img5, img6];
 const row2Images = [img7, img8, img9, img10, img11, img12];
 const row3Images = [img13, img14, img15, img16, img17, img18];
 
+// Custom hook to detect if screen width is mobile size
+function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
+
+  React.useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 768);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isMobile;
+}
+
 const Gallery = () => {
+  const isMobile = useIsMobile();
   const allRows = [row1Images, row2Images, row3Images];
 
-  // Create animation controllers per row
+  // Create animation controllers for each row
   const controlsArray = allRows.map(() => useAnimation());
 
   React.useEffect(() => {
+    const duration = isMobile ? 10 : 20; // Faster on mobile
+
     controlsArray.forEach((controls, index) => {
       const direction = index % 2 === 0 ? ["0%", "-100%"] : ["-100%", "0%"];
       controls.start({
@@ -40,23 +59,24 @@ const Gallery = () => {
         transition: {
           repeat: Infinity,
           ease: "linear",
-          duration: 20,
+          duration,
         },
       });
     });
-  }, []);
+  }, [isMobile, controlsArray]);
 
   const handleHover = (index, hover) => {
     if (hover) {
       controlsArray[index].stop(); // pause on hover
     } else {
+      const duration = isMobile ? 10 : 20;
       const direction = index % 2 === 0 ? ["0%", "-100%"] : ["-100%", "0%"];
       controlsArray[index].start({
         x: direction,
         transition: {
           repeat: Infinity,
           ease: "linear",
-          duration: 20,
+          duration,
         },
       });
     }

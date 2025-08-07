@@ -213,7 +213,7 @@ export default function Properties() {
                     }}
                     spaceBetween={20}
                     slidesPerView={1}
-                    className="relative w-full"
+                    className="relative w-[80%]"
                 >
                     {[img1, img2, img3, img4].map((image, index) => (
                         <SwiperSlide key={index}>
@@ -222,7 +222,7 @@ export default function Properties() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                                className="relative h-[500px] w-full rounded-2xl overflow-hidden"
+                                className="relative lg:h-[500px] h-[400px] w-full rounded-2xl overflow-hidden"
                             >
                                 {/* Image */}
                                 <img

@@ -94,7 +94,7 @@ export default function Navbar() {
   key={index}
   onClick={() => scrollToSection(item.href, item.name)}
   className={clsx(
-    "nav-item group flex items-center gap-2 text-lg font-semibold transition-colors whitespace-nowrap",
+    "nav-item group flex items-center gap-2 text-lg font-semibold transition-colors whitespace-nowrap cursor-pointer",
     activeSection === item.name
       ? "text-sky-300"
       : "text-white hover:text-sky-300"

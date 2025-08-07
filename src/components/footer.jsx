@@ -66,10 +66,14 @@ export default function Footer() {
                         <h3 className="text-2xl font-merienda font-semibold mb-4">Contact Us</h3>
                         <ul className="space-y-3 text-xl font-cinzel text-gray-300">
                             <li className="flex items-center justify-center gap-2">
-                                <FaPhoneAlt /> +91 72768 62000
+                                <a className="flex"  href="tel:+917276862000">
+                                <FaPhoneAlt className="mr-4" /> +91 72768 62000
+                                </a>
                             </li>
                             <li className="flex items-center justify-center gap-2">
-                                <FaPhoneAlt /> +91 96040 37000
+                                <a className="flex" href="tel:+919604037000">
+                                <FaPhoneAlt className="mr-4" /> +91 96040 37000
+                                </a>
                             </li>
                             <li className="flex items-center justify-center gap-2">
                                 <a href="mailto:seexpert111@gmail.com" className="flex items-center gap-2">
