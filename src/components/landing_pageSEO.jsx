@@ -15,30 +15,7 @@ const LandingPageSEO = () => {
       <link rel="canonical" href="https://www.coconutbeachfarm.com/" />
 
       {/* Open Graph Tags */}
-      <meta property="og:title" content="Coconut Beach Farm – Top Rated Resort in Alibaug Near Nagaon Beach" />
-      <meta
-        property="og:description"
-        content="Experience beachfront bliss at Coconut Beach Farm, a top-rated resort in Alibaug near Nagaon Beach. Enjoy a private pool, lush gardens, cozy stays, and family-friendly amenities — perfect for your next coastal escape."
-      />
-      <meta property="og:url" content="https://www.coconutbeachfarm.com/" />
-      <meta property="og:type" content="website" />
-      <meta
-        property="og:image"
-        content="https://www.coconutbeachfarm.com/assets/treeHouse-DffWmVlp.jpeg"
-      />
-
-      {/* Twitter Card Tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Coconut Beach Farm – Top Rated Resort in Alibaug Near Nagaon Beach" />
-      <meta
-        name="twitter:description"
-        content="Experience beachfront bliss at Coconut Beach Farm, a top-rated resort in Alibaug near Nagaon Beach. Enjoy a private pool, lush gardens, cozy stays, and family-friendly amenities — perfect for your next coastal escape."
-      />
-      <meta
-        name="twitter:image"
-        content="https://www.coconutbeachfarm.com/assets/treeHouse-DffWmVlp.jpeg"
-      />
-      <meta name="twitter:site" content="@homesweekend" />
+      
 
       {/* Schema Markup */}
       <script type="application/ld+json">
