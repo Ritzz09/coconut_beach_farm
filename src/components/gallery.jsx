@@ -11,10 +11,20 @@ import img6 from "../assets/gallery/6.jpeg";
 import img7 from "../assets/gallery/7.jpeg";
 import img8 from "../assets/gallery/8.jpg";
 import img9 from "../assets/gallery/9.jpeg";
+import img10 from "../assets/gallery/10.jpeg";
+import img11 from "../assets/gallery/11.jpeg";
+import img12 from "../assets/gallery/12.jpeg";
+import img13 from "../assets/gallery/13.jpeg";
+import img14 from "../assets/gallery/14.jpeg";
+import img15 from "../assets/gallery/15.jpeg";
+import img16 from "../assets/gallery/16.jpeg";
+import img17 from "../assets/gallery/17.jpeg";
+import img18 from "../assets/gallery/18.jpeg";
 
-const row1Images = [img1, img2, img3, img1, img2, img3];
-const row2Images = [img5, img6, img7, img1, img2, img3];
-const row3Images = [img9, img4, img8, img1, img2, img3];
+
+const row1Images = [img1, img2, img3, img4, img5, img6];
+const row2Images = [img7, img8, img9, img10, img11, img12];
+const row3Images = [img13, img14, img15, img16, img17, img18];
 
 const Gallery = () => {
   const allRows = [row1Images, row2Images, row3Images];
