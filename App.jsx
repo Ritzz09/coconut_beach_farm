@@ -121,7 +121,6 @@ function App() {
         <Route path="/DeluxeACRooms" element={<DeluxeACRooms/>} />
         <Route path="/TreeHouse" element={<TreeHouse />} />
         <Route path="/BoatHouse" element={<BoatHouse/>} />
-        {/* <Route path="/TriangleRoom " element={<TriangleRoom />} /> */}
         <Route path="/TriangleRoom" element={<TriangleRoom />} />
       </Routes>
     </>
