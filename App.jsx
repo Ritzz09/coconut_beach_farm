@@ -14,6 +14,11 @@ import logo from "./src/assets/mobile_logo.png";
 import { Routes, Route } from "react-router-dom";
 import ThankYou from "./src/pages/thankyou";
 import LandingPageSEO from "./src/components/landing_pageSEO";
+import SuperDeluxeRooms from "./src/pages/SuperDeluxePage";
+import DeluxeACRooms from "./src/pages/DeluxeACRooms";
+import TreeHouse from "./src/pages/TreeHouse";
+import BoatHouse from "./src/pages/BoatHouse";
+import TriangleRoom from "./src/pages/TriangleRoom";
 
 function App() {
   const [showScroll, setShowScroll] = useState(false);
@@ -112,6 +117,12 @@ function App() {
         />
 
         <Route path="/thankyou" element={<ThankYou />} />
+        <Route path="/SuperDeluxePage" element={<SuperDeluxeRooms />} />
+        <Route path="/DeluxeACRooms" element={<DeluxeACRooms/>} />
+        <Route path="/TreeHouse" element={<TreeHouse />} />
+        <Route path="/BoatHouse" element={<BoatHouse/>} />
+        {/* <Route path="/TriangleRoom " element={<TriangleRoom />} /> */}
+        <Route path="/TriangleRoom" element={<TriangleRoom />} />
       </Routes>
     </>
   );

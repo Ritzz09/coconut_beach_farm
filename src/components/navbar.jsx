@@ -1,27 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaHome, FaHotel, FaImages, FaMonument, FaBars, FaTimes, FaPhoneAlt } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { FaHome, FaHotel, FaImages, FaMonument, FaBars, FaTimes, FaPhoneAlt, FaChevronDown, FaBed, FaUsers, FaCrown } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import gsap from "gsap";
 import { useLayoutEffect } from "react";
 import logo from "../assets/logo.png";
 import logo1 from "../assets/mobile_logo.png";
 
-
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [roomsDropdownOpen, setRoomsDropdownOpen] = useState(false);
 
   const navbarRef = useRef(null);
   const menuRef = useRef(null);
+  const dropdownRef = useRef(null);
+
+  // Room types for dropdown - Updated with correct paths
+  const roomTypes = [
+    { name: "Super Deluxe Rooms", icon: <FaBed />, href: "/SuperDeluxePage", isPage: true },
+    { name: "Deluxe A/C Rooms", icon: <FaUsers />, href: "/DeluxeACRooms", isPage: true},
+    { name: "Tree House", icon: <FaCrown />, href: "/TreeHouse", isPage: true },
+    { name: "Boat House", icon: <FaBed />, href: "/BoatHouse", isPage: true },
+    { name: "Triangle Room", icon: <FaBed />, href: "/TriangleRoom", isPage: true },
+  ];
 
   const sections = [
-    { name: "Rooms", icon: <FaHotel />, href: "#rooms" },
+    { name: "Rooms", icon: <FaHotel />, href: "#rooms", hasDropdown: true },
     { name: "Gallery", icon: <FaImages />, href: "#gallery" },
     { name: "Places to visit", icon: <FaMonument />, href: "#places" },
-      { name: "Properties", icon: <FaHome />, href: "#properties" },
-    { name: "Contact", icon: <FaPhoneAlt  />, href: "#contact" },
+    { name: "Properties", icon: <FaHome />, href: "#properties" },
+    { name: "Contact", icon: <FaPhoneAlt />, href: "#contact" },
   ];
 
   useLayoutEffect(() => {
@@ -56,13 +66,47 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setRoomsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Updated function to handle both page navigation and section scrolling
+  const handleNavigation = (href, name, isPage = false) => {
+    if (isPage) {
+      // Navigate to a different page
+      window.location.href = href;
+    } else {
+      // Scroll to section on current page
+      const id = href.replace("#", "");
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    
+    setActiveSection(name);
+    setIsMobileMenuOpen(false);
+    setRoomsDropdownOpen(false);
+  };
+
+  // Keep the original function for backward compatibility
   const scrollToSection = (href, name) => {
-    const id = href.replace("#", "");
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(name);
-      setIsMobileMenuOpen(false);
+    handleNavigation(href, name, false);
+  };
+
+  const handleRoomsClick = () => {
+    if (window.innerWidth >= 768) {
+      setRoomsDropdownOpen(!roomsDropdownOpen);
+    } else {
+      scrollToSection("#rooms", "Rooms");
     }
   };
 
@@ -82,30 +126,65 @@ export default function Navbar() {
           whileHover={{ scale: 1.1 }}
           onClick={() => scrollToSection("#home", "Home")}
         >
-          <img src={logo1} className="md:hidden block  w-20  h-14" alt="Logo" loading="lazy" />
+          <img src={logo1} className="md:hidden block w-20 h-14" alt="Logo" loading="lazy" />
           <img src={logo} className="hidden md:block md:w-full w-50 md:h-15 h-8" alt="Logo" loading="lazy" />
-
         </motion.a>
 
         {/* Desktop Menu */}
         <div ref={menuRef} className="hidden md:flex gap-10">
           {sections.map((item, index) => (
-            <motion.a
-  key={index}
-  onClick={() => scrollToSection(item.href, item.name)}
-  className={clsx(
-    "nav-item group flex items-center gap-2 text-lg font-semibold transition-colors whitespace-nowrap cursor-pointer",
-    activeSection === item.name
-      ? "text-sky-300"
-      : "text-white hover:text-sky-300"
-  )}
-  whileHover={{ scale: 1.05 }}
->
-  <span className="text-xl">{item.icon}</span>
-  <span>{item.name}</span>
-  <span className="block h-0.5 w-0 group-hover:w-full bg-sky-300 transition-all duration-300"></span>
-</motion.a>
+            <div key={index} className="relative" ref={item.name === "Rooms" ? dropdownRef : null}>
+              <motion.div
+                onClick={() => item.hasDropdown ? handleRoomsClick() : scrollToSection(item.href, item.name)}
+                className={clsx(
+                  "nav-item group flex items-center gap-2 text-lg font-semibold transition-colors whitespace-nowrap cursor-pointer",
+                  activeSection === item.name
+                    ? "text-sky-300"
+                    : "text-white hover:text-sky-300"
+                )}
+                whileHover={{ scale: 1.05 }}
+              >
+                <span className="text-xl">{item.icon}</span>
+                <span>{item.name}</span>
+                {item.hasDropdown && (
+                  <motion.span
+                    className="text-sm"
+                    animate={{ rotate: roomsDropdownOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FaChevronDown />
+                  </motion.span>
+                )}
+                <span className="block h-0.5 w-0 group-hover:w-full bg-sky-300 transition-all duration-300"></span>
+              </motion.div>
 
+              {/* Dropdown Menu */}
+              {item.hasDropdown && (
+                <AnimatePresence>
+                  {roomsDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden"
+                    >
+                      {roomTypes.map((room, roomIndex) => (
+                        <motion.div
+                          key={roomIndex}
+                          onClick={() => handleNavigation(room.href, room.name, room.isPage)}
+                          className="flex items-center gap-3 px-4 py-3 text-gray-800 hover:bg-sky-50 hover:text-sky-600 cursor-pointer transition-colors"
+                          whileHover={{ backgroundColor: "rgba(14, 165, 233, 0.1)" }}
+                        >
+                          <span className="text-lg">{room.icon}</span>
+                          <span className="font-medium">{room.name}</span>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
+            </div>
           ))}
         </div>
 
@@ -119,16 +198,33 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden flex flex-col items-center bg-white/80 py-10 gap-6 shadow-md text-black">
           {sections.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => scrollToSection(item.href, item.name)}
-              className={clsx(
-                "flex items-center gap-2 text-lg font-semibold cursor-pointer",
-                activeSection === item.name ? "text-sky-500" : "hover:text-sky-500"
+            <div key={index} className="w-full flex flex-col items-center">
+              <div
+                onClick={() => scrollToSection(item.href, item.name)}
+                className={clsx(
+                  "flex items-center gap-2 text-lg font-semibold cursor-pointer",
+                  activeSection === item.name ? "text-sky-500" : "hover:text-sky-500"
+                )}
+              >
+                <span className="text-xl">{item.icon}</span>
+                {item.name}
+              </div>
+
+              {/* Mobile dropdown for rooms */}
+              {item.hasDropdown && (
+                <div className="mt-2 flex flex-col items-center gap-2">
+                  {roomTypes.map((room, roomIndex) => (
+                    <div
+                      key={roomIndex}
+                      onClick={() => handleNavigation(room.href, room.name, room.isPage)}
+                      className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-sky-500 cursor-pointer pl-6"
+                    >
+                      <span>{room.icon}</span>
+                      <span>{room.name}</span>
+                    </div>
+                  ))}
+                </div>
               )}
-            >
-              <span className="text-xl">{item.icon}</span>
-              {item.name}
             </div>
           ))}
         </div>
