@@ -178,7 +178,7 @@ export default function HeroSection() {
         {/* Sidebar Button */}
         <button
           onClick={() => setShowForm(true)}
-          className="fixed md:top-1/2 top-3/4 right-0 z-100 bg-slate-900/80  text-xl md:text-2xl  text-white/80 md:px-4 md:py-4 px-2 py-2 font-cinzel rounded-l-md shadow-md transform -translate-y-1/2 hover:bg-white/70 hover:text-slate-900 transition"
+          className="fixed md:top-1/2 top-3/4 right-0 z-100 bg-slate-900 border-2 border-white border-r-0 text-xl md:text-2xl  text-white md:px-4 md:py-4 px-2 py-2 font-cinzel rounded-3xl rounded-r-none shadow-md transform -translate-y-1/2 hover:bg-white/70 hover:text-slate-900 transition"
         >
           Contact Us
         </button>

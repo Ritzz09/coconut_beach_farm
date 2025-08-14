@@ -2,32 +2,34 @@ import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useNavigate } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  Star, 
-  Users, 
-  Wifi, 
-  Car, 
-  Coffee, 
-  Shield, 
+import { GiTreeSwing } from "react-icons/gi";
+import {
+  ArrowRight,
+  Star,
+  Users,
+  Wifi,
+  Car,
+  Coffee,
+  Shield,
   Award,
-  Wind, 
-  Tv, 
-  Phone, 
+  Wind,
+  Tv,
+  Phone,
   Waves,
   Bath,
-  X, 
-  ChevronLeft, 
-  ChevronRight, 
+  X,
+  ChevronLeft,
+  ChevronRight,
   ZoomIn,
-  Send, 
-  Calendar, 
-  Mail, 
+  Send,
+  Calendar,
+  Mail,
   MapPin,
   Refrigerator,
   AirVent,
   MonitorSpeaker,
-  Fan
+  Fan,
+
 } from 'lucide-react';
 
 import img1 from "../rooms/BoatHouse/1.webp";
@@ -42,7 +44,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const BoatHouse = () => {
   const navigate = useNavigate();
-  
+
   // Refs for GSAP animations
   const heroRef = useRef(null);
   const aboutRef = useRef(null);
@@ -123,9 +125,9 @@ const BoatHouse = () => {
         50% { opacity: 1; }
       }
     `;
-    
+
     document.head.appendChild(styleSheet);
-    
+
     return () => {
       if (document.head.contains(styleSheet)) {
         document.head.removeChild(styleSheet);
@@ -167,7 +169,7 @@ const BoatHouse = () => {
     setIsPopupOpen(true);
     if (!prefersReducedMotion) {
       setTimeout(() => {
-        gsap.fromTo('.popup-form', 
+        gsap.fromTo('.popup-form',
           { opacity: 0, scale: 0.8, y: 50 },
           { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: 'power2.out' }
         );
@@ -248,20 +250,39 @@ const BoatHouse = () => {
   ];
 
   const contactInfo = [
-    { icon: Phone, label: 'Phone', value: '+91 72768 62000' },
-    { icon: Mail, label: 'Email', value: 'rameshdeshmukh9@gmail.com' },
-    { icon: MapPin, label: 'Address', value: 'Grampanchyat Office, Thakur Ali, Shivaji Chowk, near Annpurna Hotel, Nagaon, Alibag, Maharashtra 402201' }
+    {
+      icon: Phone,
+      label: "Phone",
+      values: [
+        { text: "+91 72768 62000", link: "tel:+917276862000" },
+        { text: "+91 96040 37000", link: "tel:+919604037000" } // new phone, next line
+      ]
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      values: [
+        { text: "rameshdeshmukh9@gmail.com", link: "mailto:rameshdeshmukh9@gmail.com" }
+      ]
+    },
+    {
+      icon: MapPin,
+      label: "Address",
+      values: [
+        { text: "Grampanchayat Office, Thakur Ali, Shivaji Chowk, near Annpurna Hotel, Nagaon, Alibag, Maharashtra 402201" }
+      ]
+    }
   ];
 
   const amenities = [
     { icon: Refrigerator, title: 'Mini Refrigerator' },
     { icon: AirVent, title: 'Air Conditioning' },
-    { icon: MonitorSpeaker, title: 'Flat-Screen Television' },
-    { icon: Bath, title: 'Ensuite Bathroom (with hot water on request)' },
+    { icon: Tv, title: 'Flat-Screen Television' },
+    { icon: Bath, title: 'Ensuite Bathroom ' },
     { icon: Fan, title: 'Ceiling Fan' },
     { icon: Phone, title: 'Telephone (Landline)' },
     { icon: Coffee, title: 'Electric Kettle (on request)' },
-    { icon: Waves, title: 'Hammock' }
+    { icon: GiTreeSwing, title: 'Swing' }
   ];
 
   // GSAP Animations
@@ -274,12 +295,12 @@ const BoatHouse = () => {
     const ctx = gsap.context(() => {
       // Hero Animations
       const heroTl = gsap.timeline();
-      
-      gsap.fromTo('.hero-bg', 
-        { scale: 1.1 }, 
-        { 
-          scale: 1, 
-          duration: 2, 
+
+      gsap.fromTo('.hero-bg',
+        { scale: 1.1 },
+        {
+          scale: 1,
+          duration: 2,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: heroRef.current,
@@ -290,25 +311,25 @@ const BoatHouse = () => {
         }
       );
 
-      heroTl.fromTo('.hero-badge', 
-        { y: 50, opacity: 0 }, 
+      heroTl.fromTo('.hero-badge',
+        { y: 50, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
       )
-      .fromTo('.hero-title', 
-        { y: 80, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, 
-        '-=0.4'
-      )
-      .fromTo('.hero-subtitle', 
-        { y: 60, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, 
-        '-=0.6'
-      )
-      .fromTo('.hero-buttons .btn', 
-        { y: 40, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.2, ease: 'power3.out' }, 
-        '-=0.4'
-      );
+        .fromTo('.hero-title',
+          { y: 80, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+          '-=0.4'
+        )
+        .fromTo('.hero-subtitle',
+          { y: 60, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+          '-=0.6'
+        )
+        .fromTo('.hero-buttons .btn',
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.2, ease: 'power3.out' },
+          '-=0.4'
+        );
 
       gsap.to('.hero-stars', {
         y: -10,
@@ -319,7 +340,7 @@ const BoatHouse = () => {
       });
 
       // About Animations
-      gsap.fromTo('.about-image', 
+      gsap.fromTo('.about-image',
         { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
         {
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
@@ -333,7 +354,7 @@ const BoatHouse = () => {
         }
       );
 
-      gsap.fromTo('.about-text-left', 
+      gsap.fromTo('.about-text-left',
         { x: -100, opacity: 0 },
         {
           x: 0,
@@ -348,7 +369,7 @@ const BoatHouse = () => {
         }
       );
 
-      gsap.fromTo('.about-text-right', 
+      gsap.fromTo('.about-text-right',
         { x: 100, opacity: 0 },
         {
           x: 0,
@@ -363,7 +384,7 @@ const BoatHouse = () => {
         }
       );
 
-      gsap.fromTo('.stat-item', 
+      gsap.fromTo('.stat-item',
         { y: 50, opacity: 0 },
         {
           y: 0,
@@ -380,7 +401,7 @@ const BoatHouse = () => {
       );
 
       // Amenities Animations
-      gsap.fromTo('.amenity-card', 
+      gsap.fromTo('.amenity-card',
         { y: 80, opacity: 0, scale: 0.8 },
         {
           y: 0,
@@ -398,7 +419,7 @@ const BoatHouse = () => {
       );
 
       // Gallery Animations - FIXED TRIGGER
-      gsap.fromTo('.gallery-item', 
+      gsap.fromTo('.gallery-item',
         { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)', opacity: 0 },
         {
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
@@ -415,7 +436,7 @@ const BoatHouse = () => {
       );
 
       // Contact Animations
-      gsap.fromTo('.contact-content', 
+      gsap.fromTo('.contact-content',
         { opacity: 0, filter: 'blur(10px)', y: 50 },
         {
           opacity: 1,
@@ -431,7 +452,7 @@ const BoatHouse = () => {
         }
       );
 
-      gsap.fromTo('.form-field', 
+      gsap.fromTo('.form-field',
         { y: 30, opacity: 0 },
         {
           y: 0,
@@ -455,7 +476,7 @@ const BoatHouse = () => {
   const openLightbox = (index) => {
     setSelectedImage(index);
     if (!prefersReducedMotion) {
-      gsap.fromTo('.lightbox', 
+      gsap.fromTo('.lightbox',
         { opacity: 0, scale: 0.8 },
         { opacity: 1, scale: 1, duration: 0.3, ease: 'power2.out' }
       );
@@ -478,11 +499,11 @@ const BoatHouse = () => {
 
   const navigateImage = (direction) => {
     if (selectedImage === null) return;
-    
-    const newIndex = direction === 'prev' 
+
+    const newIndex = direction === 'prev'
       ? (selectedImage - 1 + filteredImages.length) % filteredImages.length
       : (selectedImage + 1) % filteredImages.length;
-    
+
     setSelectedImage(newIndex);
   };
 
@@ -490,7 +511,7 @@ const BoatHouse = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (selectedImage === null) return;
-      
+
       switch (e.key) {
         case 'Escape':
           closeLightbox();
@@ -511,16 +532,16 @@ const BoatHouse = () => {
   return (
     <div className="super-deluxe-rooms">
       {/* Hero Section */}
-      <section 
+      <section
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
         style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
       >
-        <div 
+        <div
           className="hero-bg absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
           style={{ backgroundImage: 'url(https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080)' }}
         />
-        
+
         <div className="hero-content relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="hero-badge inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 mb-8 shadow-lg">
             <div className="hero-stars flex items-center space-x-1">
@@ -531,7 +552,15 @@ const BoatHouse = () => {
             <span className="text-gray-700 font-medium">5-Star Luxury</span>
           </div>
 
-          <h1 
+            <button
+           onClick={handleBookingClick}
+          className="fixed md:top-1/2 top-3/4 right-0 z-100 bg-slate-900 border-2 border-white border-r-0 text-xl md:text-2xl  text-white md:px-4 md:py-4 px-2 py-2 font-cinzel rounded-3xl rounded-r-none shadow-md transform -translate-y-1/2 hover:bg-white/70 hover:text-slate-900 transition"
+        >
+          Contact Us
+        </button>
+
+
+          <h1
             className="hero-title text-5xl md:text-7xl font-bold mb-6 leading-tight"
             style={{
               background: 'linear-gradient(to right, #24243e, #302b63, #0f0c29)',
@@ -548,7 +577,7 @@ const BoatHouse = () => {
           </p>
 
           <div className="hero-buttons flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <button 
+            <button
               className="btn group px-8 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
               style={{
                 background: 'linear-gradient(to right, #24243e, #302b63, #0f0c29)',
@@ -565,7 +594,7 @@ const BoatHouse = () => {
       </section>
 
       {/* About Section */}
-      <section 
+      <section
         ref={aboutRef}
         className="relative py-20 lg:py-32"
         style={{ background: 'linear-gradient(to right, #24243e, #302b63, #0f0c29)' }}
@@ -603,7 +632,7 @@ const BoatHouse = () => {
 
           <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
             <div className="about-image overflow-hidden rounded-2xl shadow-2xl">
-              <img 
+              <img
                 src={img1}
                 alt="Luxurious Boat House interior with nautical design"
                 className="w-full h-[400px] lg:h-[500px] object-cover"
@@ -639,7 +668,7 @@ const BoatHouse = () => {
                 <div className="grid grid-cols-2 gap-4">
                   {features.map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3 text-gray-300">
-                      <feature.icon 
+                      <feature.icon
                         className="w-5 h-5 flex-shrink-0"
                         style={{
                           background: 'linear-gradient(to right, white, #93c5fd)',
@@ -674,14 +703,14 @@ const BoatHouse = () => {
       </section>
 
       {/* Amenities Section */}
-      <section 
+      <section
         ref={amenitiesRef}
         className="py-20 lg:py-32"
         style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 
+            <h2
               className="text-4xl md:text-6xl font-bold mb-6"
               style={{
                 background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
@@ -692,15 +721,15 @@ const BoatHouse = () => {
             >
               Premium Amenities
             </h2>
-            
+
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Every luxury amenity you could desire, thoughtfully curated for your ultimate comfort and convenience.
             </p>
           </div>
 
-          <div className="amenities-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="amenities-grid grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {amenities.map((amenity, index) => (
-              <div 
+              <div
                 key={index}
                 className="amenity-card bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/50 cursor-pointer transition-all hover:scale-105 hover:-translate-y-2"
                 onMouseEnter={(e) => {
@@ -717,7 +746,7 @@ const BoatHouse = () => {
                 }}
               >
                 <div className="amenity-icon mb-4">
-                  <amenity.icon 
+                  <amenity.icon
                     className="w-12 h-12"
                     style={{
                       background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
@@ -740,7 +769,7 @@ const BoatHouse = () => {
       </section>
 
       {/* Gallery Section */}
-      <section 
+      <section
         ref={galleryRef}
         className="relative py-20 lg:py-32"
         style={{ background: 'linear-gradient(to right, #24243e, #302b63, #0f0c29)' }}
@@ -781,11 +810,10 @@ const BoatHouse = () => {
               <button
                 key={category.id}
                 onClick={() => setFilter(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all ${
-                  filter === category.id
+                className={`px-6 py-3 rounded-full font-medium transition-all ${filter === category.id
                     ? 'bg-blue-300 text-gray-900'
                     : 'bg-white/10 text-white hover:bg-white/20'
-                }`}
+                  }`}
               >
                 {category.label}
               </button>
@@ -795,12 +823,12 @@ const BoatHouse = () => {
           {/* Mobile Slider / Desktop Grid */}
           <div className="mobile-slider">
             {filteredImages.map((image, index) => (
-              <div 
+              <div
                 key={`${image.src}-${index}`}
                 className="mobile-slide gallery-item group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer"
                 onClick={() => openLightbox(index)}
               >
-                <img 
+                <img
                   src={image.src}
                   alt={image.alt || `Gallery image ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -825,13 +853,13 @@ const BoatHouse = () => {
           {selectedImage !== null && (
             <div className="lightbox fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
               <div className="relative max-w-4xl max-h-[90vh] w-full">
-                <img 
+                <img
                   src={filteredImages[selectedImage].src}
                   alt={filteredImages[selectedImage].alt || `Gallery image ${selectedImage + 1}`}
                   className="w-full h-full object-contain"
                 />
-                
-                <button 
+
+                <button
                   onClick={closeLightbox}
                   className="absolute top-4 right-4 w-12 h-12 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
                   aria-label="Close lightbox"
@@ -841,15 +869,15 @@ const BoatHouse = () => {
 
                 {filteredImages.length > 1 && (
                   <>
-                    <button 
+                    <button
                       onClick={() => navigateImage('prev')}
                       className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
                       aria-label="Previous image"
                     >
                       <ChevronLeft className="w-6 h-6" />
                     </button>
-                    
-                    <button 
+
+                    <button
                       onClick={() => navigateImage('next')}
                       className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
                       aria-label="Next image"
@@ -869,7 +897,7 @@ const BoatHouse = () => {
       </section>
 
       {/* Contact Form Section */}
-      <section 
+      <section
         ref={contactRef}
         className="py-12 lg:py-16"
         style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
@@ -878,7 +906,7 @@ const BoatHouse = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="contact-content">
             <div className="text-center mb-12">
-              <h2 
+              <h2
                 className="text-3xl md:text-5xl font-bold mb-4"
                 style={{
                   background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
@@ -899,8 +927,8 @@ const BoatHouse = () => {
             <div className="max-w-full mx-auto">
               <div className="text-center space-y-8">
                 <div>
-                  <h3 
-                    className="text-2xl font-bold mb-8"
+                  <h3
+                    className="text-4xl font-bold mb-8"
                     style={{
                       background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
                       WebkitBackgroundClip: 'text',
@@ -920,25 +948,38 @@ const BoatHouse = () => {
                       >
                         {/* Icon and Label on same line */}
                         <div className="flex items-center justify-center sm:justify-start lg:justify-center mb-2 lg:mb-3">
-                          <div className="w-6 h-6 lg:w-7 lg:h-7 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3">
-                            <info.icon className="w-4 h-4 lg:w-5 lg:h-5 text-emerald-600" />
+                          <div className="w-10 h-10 lg:w-15 lg:h-15 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3">
+                            <info.icon className="w-7 h-7 lg:w-8 lg:h-8 text-emerald-600" />
                           </div>
-                          <div className="font-bold text-gray-900 text-sm lg:text-lg">
+                          <div className="font-bold text-gray-900 text-xl lg:text-2xl">
                             {info.label}
                           </div>
                         </div>
-                        
+
                         {/* Value on separate line */}
-                        <div 
-                          className="text-gray-600 text-xs lg:text-sm leading-relaxed lg:leading-normal px-2"
+                        <div
+                          className="text-black text-xl lg:text-xl leading-relaxed lg:leading-normal px-2 space-y-1"
                           style={{
                             wordBreak: 'break-word',
                             hyphens: 'auto',
                             maxWidth: '100%'
                           }}
                         >
-                          {info.value}
+                          {info.values.map((val, i) =>
+                            val.link ? (
+                              <a
+                                key={i}
+                                href={val.link}
+                                className="block text-black hover:underline"
+                              >
+                                {val.text}
+                              </a>
+                            ) : (
+                              <span key={i} className="block">{val.text}</span>
+                            )
+                          )}
                         </div>
+
                       </div>
                     ))}
                   </div>
@@ -979,7 +1020,7 @@ const BoatHouse = () => {
               {/* Form Content */}
               <div className="w-full border-t-8 border-dotted border-[#dceff5] mb-4"></div>
               <h2 className="text-3xl font-bold text-[#dceff5] mb-6 text-center">Get in Touch</h2>
-              
+
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div className="space-y-4">
@@ -1053,7 +1094,7 @@ const BoatHouse = () => {
                   </div>
                 </div>
               </form>
-              
+
               <div className="w-full border-b-8 border-dotted border-[#0F0D1D] mt-6"></div>
             </div>
           </div>

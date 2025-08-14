@@ -2,6 +2,8 @@ import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useNavigate } from 'react-router-dom'; // Add this import
+import { GiTreeSwing } from "react-icons/gi";
+
 import { 
   ArrowRight, 
   Star, 
@@ -246,22 +248,42 @@ const TreeHouse = () => {
     { number: '100% ', label: 'Secure Zones' }
   ];
 
-  const contactInfo = [
-    { icon: Phone, label: 'Phone', value: '+91 72768 62000' },
-    { icon: Mail, label: 'Email', value: 'rameshdeshmukh9@gmail.com' },
-    { icon: MapPin, label: 'Address', value: 'Grampanchyat Office, Thakur Ali, Shivaji Chowk, near Annpurna Hotel, Nagaon, Alibag, Maharashtra 402201' }
+    const contactInfo = [
+    {
+      icon: Phone,
+      label: "Phone",
+      values: [
+        { text: "+91 72768 62000", link: "tel:+917276862000" },
+        { text: "+91 96040 37000", link: "tel:+919604037000" } // new phone, next line
+      ]
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      values: [
+        { text: "rameshdeshmukh9@gmail.com", link: "mailto:rameshdeshmukh9@gmail.com" }
+      ]
+    },
+    {
+      icon: MapPin,
+      label: "Address",
+      values: [
+        { text: "Grampanchayat Office, Thakur Ali, Shivaji Chowk, near Annpurna Hotel, Nagaon, Alibag, Maharashtra 402201" }
+      ]
+    }
   ];
 
   const amenities = [
     { icon: Refrigerator, title: 'Mini Refrigerator' },
     { icon: AirVent, title: 'Air Conditioning' },
-    { icon: MonitorSpeaker, title: 'Flat-Screen Television' },
-    { icon: Bath, title: 'Ensuite Bathroom (with hot water on request)' },
+    { icon: Tv, title: 'Flat-Screen Television' },
+    { icon: Bath, title: 'Ensuite Bathroom ' },
     { icon: Fan, title: 'Ceiling Fan' },
     { icon: Phone, title: 'Telephone (Landline)' },
     { icon: Coffee, title: 'Electric Kettle (on request)' },
-    { icon: Waves, title: 'Hammock' }
+    { icon: GiTreeSwing, title: 'Swing' }
   ];
+
 
   // GSAP Animations
   useLayoutEffect(() => {
@@ -533,6 +555,13 @@ const TreeHouse = () => {
             <span className="text-gray-700 font-medium">5-Star Luxury</span>
           </div>
 
+           <button
+           onClick={handleBookingClick}
+          className="fixed md:top-1/2 top-3/4 right-0 z-100 bg-slate-900 border-2 border-white border-r-0 text-xl md:text-2xl  text-white md:px-4 md:py-4 px-2 py-2 font-cinzel rounded-3xl rounded-r-none shadow-md transform -translate-y-1/2 hover:bg-white/70 hover:text-slate-900 transition"
+        >
+          Contact Us
+        </button>
+
           <h1 
             className="hero-title text-5xl md:text-7xl font-bold mb-6 leading-tight"
             style={{
@@ -676,70 +705,71 @@ const TreeHouse = () => {
       </section>
 
       {/* Amenities Section */}
-      <section 
-        ref={amenitiesRef}
-        className="py-20 lg:py-32"
-        style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 
-              className="text-4xl md:text-6xl font-bold mb-6"
-              style={{
-                background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}
-            >
-              Premium Amenities
-            </h2>
-            
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Every luxury amenity you could desire, thoughtfully curated for your ultimate comfort and convenience.
-            </p>
-          </div>
-
-          <div className="amenities-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {amenities.map((amenity, index) => (
-              <div 
-                key={index}
-                className="amenity-card bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/50 cursor-pointer transition-all hover:scale-105 hover:-translate-y-2"
-                onMouseEnter={(e) => {
-                  if (!prefersReducedMotion) {
-                    const icon = e.currentTarget.querySelector('.amenity-icon');
-                    gsap.to(icon, { scale: 1.2, rotate: 5, duration: 0.3, ease: 'power2.out' });
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!prefersReducedMotion) {
-                    const icon = e.currentTarget.querySelector('.amenity-icon');
-                    gsap.to(icon, { scale: 1, rotate: 0, duration: 0.3, ease: 'power2.out' });
-                  }
-                }}
-              >
-                <div className="amenity-icon mb-4">
-                  <amenity.icon 
-                    className="w-12 h-12"
-                    style={{
-                      background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text'
-                    }}
-                  />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {amenity.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {amenity.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section
+             ref={amenitiesRef}
+             className="py-20 lg:py-32"
+             style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
+           >
+             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+               <div className="text-center mb-16">
+                 <h2
+                   className="text-4xl md:text-6xl font-bold mb-6"
+                   style={{
+                     background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+                     WebkitBackgroundClip: 'text',
+                     WebkitTextFillColor: 'transparent',
+                     backgroundClip: 'text'
+                   }}
+                 >
+                   Premium Amenities
+                 </h2>
+     
+                 <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                   Every luxury amenity you could desire, thoughtfully curated for your ultimate comfort and convenience.
+                 </p>
+               </div>
+     
+               <div className="amenities-grid grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                 {amenities.map((amenity, index) => (
+                   <div
+                     key={index}
+                     className="amenity-card bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/50 cursor-pointer transition-all hover:scale-105 hover:-translate-y-2"
+                     onMouseEnter={(e) => {
+                       if (!prefersReducedMotion) {
+                         const icon = e.currentTarget.querySelector('.amenity-icon');
+                         gsap.to(icon, { scale: 1.2, rotate: 5, duration: 0.3, ease: 'power2.out' });
+                       }
+                     }}
+                     onMouseLeave={(e) => {
+                       if (!prefersReducedMotion) {
+                         const icon = e.currentTarget.querySelector('.amenity-icon');
+                         gsap.to(icon, { scale: 1, rotate: 0, duration: 0.3, ease: 'power2.out' });
+                       }
+                     }}
+                   >
+                     <div className="amenity-icon mb-4">
+                       <amenity.icon
+                         className="w-12 h-12"
+                         style={{
+                           background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+                           WebkitBackgroundClip: 'text',
+                           WebkitTextFillColor: 'transparent',
+                           backgroundClip: 'text'
+                         }}
+                       />
+                     </div>
+                     <h3 className="text-xl font-bold text-gray-900 mb-3">
+                       {amenity.title}
+                     </h3>
+                     <p className="text-gray-600 leading-relaxed">
+                       {amenity.description}
+                     </p>
+                   </div>
+                 ))}
+               </div>
+             </div>
+           </section>
+     
 
        {/* Gallery Section */}
             <section 
@@ -871,97 +901,111 @@ const TreeHouse = () => {
       </section>
       
             {/* Contact Form Section */}
-                  <section 
-                    ref={contactRef}
-                    className="py-12 lg:py-16"
-                    style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
-                    id="contact"
-                  >
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                      <div className="contact-content">
-                        <div className="text-center mb-12">
-                          <h2 
-                            className="text-3xl md:text-5xl font-bold mb-4"
-                            style={{
-                              background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
-                              backgroundClip: 'text'
-                            }}
-                          >
-                            Reserve Your Stay
-                          </h2>
-            
-                          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                            Ready to experience ultimate luxury? <br />Contact our reservations team for booking.
-                          </p>
-                        </div>
-            
-                        {/* Centered content */}
-                        <div className="max-w-full mx-auto">
-                          <div className="text-center space-y-8">
-                            <div>
-                              <h3 
-                                className="text-2xl font-bold mb-8"
-                                style={{
-                                  background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-                                  WebkitBackgroundClip: 'text',
-                                  WebkitTextFillColor: 'transparent',
-                                  backgroundClip: 'text'
-                                }}
-                              >
-                                Get In Touch
-                              </h3>
-            
-                              {/* Optimized contact info - icon and label on same line */}
-                              <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 mb-8">
-                                {contactInfo.map((info, index) => (
-                                  <div
-                                    key={index}
-                                    className="w-full lg:w-1/3 text-center sm:text-left lg:text-center"
-                                  >
-                                    {/* Icon and Label on same line */}
-                                    <div className="flex items-center justify-center sm:justify-start lg:justify-center mb-2 lg:mb-3">
-                                      <div className="w-6 h-6 lg:w-7 lg:h-7 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3">
-                                        <info.icon className="w-4 h-4 lg:w-5 lg:h-5 text-emerald-600" />
-                                      </div>
-                                      <div className="font-bold text-gray-900 text-sm lg:text-lg">
-                                        {info.label}
-                                      </div>
-                                    </div>
-                                    
-                                    {/* Value on separate line */}
-                                    <div 
-                                      className="text-gray-600 text-xs lg:text-sm leading-relaxed lg:leading-normal px-2"
-                                      style={{
-                                        wordBreak: 'break-word',
-                                        hyphens: 'auto',
-                                        maxWidth: '100%'
-                                      }}
-                                    >
-                                      {info.value}
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-            
-                            {/* Centered Send Inquiry Button */}
-                            <button
-                              onClick={handleBookingClick}
-                              className="px-8 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl text-white"
-                              style={{
-                                background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)"
-                              }}
-                            >
-                              <Send className="inline-block mr-2 w-5 h-5" />
-                              Send Inquiry
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
+                   <section
+                         ref={contactRef}
+                         className="py-12 lg:py-16"
+                         style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
+                         id="contact"
+                       >
+                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                           <div className="contact-content">
+                             <div className="text-center mb-12">
+                               <h2
+                                 className="text-3xl md:text-5xl font-bold mb-4"
+                                 style={{
+                                   background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+                                   WebkitBackgroundClip: 'text',
+                                   WebkitTextFillColor: 'transparent',
+                                   backgroundClip: 'text'
+                                 }}
+                               >
+                                 Reserve Your Stay
+                               </h2>
+                 
+                               <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+                                 Ready to experience ultimate luxury? <br />Contact our reservations team for booking.
+                               </p>
+                             </div>
+                 
+                             {/* Centered content */}
+                             <div className="max-w-full mx-auto">
+                               <div className="text-center space-y-8">
+                                 <div>
+                                   <h3
+                                     className="text-4xl font-bold mb-8"
+                                     style={{
+                                       background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+                                       WebkitBackgroundClip: 'text',
+                                       WebkitTextFillColor: 'transparent',
+                                       backgroundClip: 'text'
+                                     }}
+                                   >
+                                     Get In Touch
+                                   </h3>
+                 
+                                   {/* Optimized contact info - icon and label on same line */}
+                                   <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 mb-8">
+                                     {contactInfo.map((info, index) => (
+                                       <div
+                                         key={index}
+                                         className="w-full lg:w-1/3 text-center sm:text-left lg:text-center"
+                                       >
+                                         {/* Icon and Label on same line */}
+                                         <div className="flex items-center justify-center sm:justify-start lg:justify-center mb-2 lg:mb-3">
+                                           <div className="w-10 h-10 lg:w-15 lg:h-15 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3">
+                                             <info.icon className="w-7 h-7 lg:w-8 lg:h-8 text-emerald-600" />
+                                           </div>
+                                           <div className="font-bold text-gray-900 text-xl lg:text-2xl">
+                                             {info.label}
+                                           </div>
+                                         </div>
+                 
+                                         {/* Value on separate line */}
+                                         <div
+                                           className="text-black text-xl lg:text-xl leading-relaxed lg:leading-normal px-2 space-y-1"
+                                           style={{
+                                             wordBreak: 'break-word',
+                                             hyphens: 'auto',
+                                             maxWidth: '100%'
+                                           }}
+                                         >
+                                           {info.values.map((val, i) =>
+                                             val.link ? (
+                                               <a
+                                                 key={i}
+                                                 href={val.link}
+                                                 className="block text-black hover:underline"
+                                               >
+                                                 {val.text}
+                                               </a>
+                                             ) : (
+                                               <span key={i} className="block">{val.text}</span>
+                                             )
+                                           )}
+                                         </div>
+                 
+                                       </div>
+                                     ))}
+                                   </div>
+                                 </div>
+                 
+                                 {/* Centered Send Inquiry Button */}
+                                 <button
+                                   onClick={handleBookingClick}
+                                   className="px-8 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl text-white"
+                                   style={{
+                                     background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)"
+                                   }}
+                                 >
+                                   <Send className="inline-block mr-2 w-5 h-5" />
+                                   Send Inquiry
+                                 </button>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                       </section>
+                 
             
                   {/* Popup Modal */}
                   {isPopupOpen && (

@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
 import room1 from "../assets/superDeluxe.jpg";
 import room2 from "../assets/duplexAC.jpeg";
 import room3 from "../assets/treeHouse.jpeg";
 import room4 from "../assets/boatHouse.jpeg";
 import room5 from "../assets/royalTent.jpeg";
-import room from "../assets/rooms.jpg"
 
 const ImageBlock = ({ title, image }) => {
   const ref = useRef(null);
@@ -58,11 +58,11 @@ const ImageBlock = ({ title, image }) => {
 
 const FramerScrollReveal = () => {
   const data = [
-    { id: 1, image: room1, title: "Super Deluxe Rooms" },
-    { id: 2, image: room2, title: "Duplex A/C Rooms" },
-    { id: 3, image: room3, title: "Tree House" },
-    { id: 4, image: room4, title: "Boat House" },
-    { id: 5, image: room5, title: "Royal Tent" },
+    { id: 1, image: room1, title: "Super Deluxe Rooms", url: "/room/super-deluxe" },
+    { id: 2, image: room2, title: "Duplex A/C Rooms", url:"/room/deluxe-ac-room"},
+    { id: 3, image: room3, title: "Tree House", url:"/room/tree-house" },
+    { id: 4, image: room4, title: "Boat House", url:"/room/boat-house" },
+    { id: 5, image: room5, title: "Triangle Room", url:"/room/triangle-room" },
   ];
 
   return (
@@ -124,11 +124,19 @@ const FramerScrollReveal = () => {
   <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
 
   {/* Foreground Content */}
-  <div className="relative z-20">
-    {data.map((room) => (
-      <ImageBlock key={room.id} title={room.title} image={room.image} />
-    ))}
-  </div>
+ <div className="relative z-20">
+  {data.map((room) => (
+    <ImageBlock
+      key={room.id}
+      title={
+        <Link to={room.url} className="hover:underline">
+          {room.title}
+        </Link>
+      }
+      image={room.image}
+    />
+  ))}
+</div>
 
   {/* Bottom Blob Divider */}
   <div className="relative z-30">

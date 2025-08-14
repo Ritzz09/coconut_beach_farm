@@ -50,7 +50,7 @@ const Gallery = () => {
   const controlsArray = allRows.map(() => useAnimation());
 
   React.useEffect(() => {
-    const duration = isMobile ? 10 : 20; // Faster on mobile
+    const duration = isMobile ? 10 : 10; // Faster on mobile
 
     controlsArray.forEach((controls, index) => {
       const direction = index % 2 === 0 ? ["0%", "-100%"] : ["-100%", "0%"];

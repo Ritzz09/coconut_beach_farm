@@ -184,23 +184,7 @@ export default function Properties() {
 
                     </div>
                 </div>
-                <motion.div className="relative w-full flex justify-center"
-                    initial={{ opacity: 0, y: 60 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    viewport={{ once: false, amount: 0.5 }}>
-                    <a
-                        href="https://weekendhome.in/index.php"
-
-                        className="bg-gradient-to-r from-[#16222A] via-[#2e4856] to-[#16222A]
-               bg-[length:200%_auto] hover:bg-[position:right_center]
-               transition-all duration-500
-               text-white text-sm md:text-base font-semibold uppercase
-               px-8 py-4 rounded-xl shadow-lg tracking-wider"
-                    >
-                        Discover All Properties
-                    </a>
-                </motion.div>
+         
 
             </div>
             {/* Mobile View */}
