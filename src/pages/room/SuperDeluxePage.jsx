@@ -594,7 +594,7 @@ const SuperDeluxeRooms = () => {
           </h1>
 
           <p className="hero-subtitle text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Stay in one of our 6 SuperDeluxeRooms, each with a mini fridge, TV, AC, and attached washroom. Blending rustic beach charm with modern comfort, they offer a peaceful retreat under coconut palms, just minutes from Alibaug's shores.
+            Stay in one of our 6 Super Deluxe Rooms, each with a mini fridge, TV, AC, and attached washroom. Blending rustic beach charm with modern comfort, they offer a peaceful retreat under coconut palms, just minutes from Alibaug's shores.
           </p>
 
           <div className="hero-buttons flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
@@ -647,7 +647,7 @@ const SuperDeluxeRooms = () => {
               Ultimate Luxury
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              SuperDeluxeRoom – Your Coastal Hideaway in Alibaug
+              Super Deluxe Room – Your Coastal Hideaway in Alibaug
             </p>
           </div>
 
@@ -665,7 +665,7 @@ const SuperDeluxeRooms = () => {
             <div className="space-y-8">
               <div className="about-text-left">
                 <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                  Wake up to the gentle sound of rustling coconut palms and the fresh coastal breeze in our SuperDeluxeRooms. Designed for those who seek a perfect blend of rustic beach charm and modern comfort, each of our six exclusive rooms offers a cozy escape just minutes away from Alibaug's golden sands.
+                  Wake up to the gentle sound of rustling coconut palms and the fresh coastal breeze in our Super Deluxe Rooms. Designed for those who seek a perfect blend of rustic beach charm and modern comfort, each of our six exclusive rooms offers a cozy escape just minutes away from Alibaug's golden sands.
                 </p>
               </div>
 

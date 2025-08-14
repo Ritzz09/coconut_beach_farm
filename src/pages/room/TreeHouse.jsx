@@ -11,6 +11,7 @@ import {
   Wifi, 
   Car, 
   Coffee, 
+  Tv,
   Shield, 
   Award,
   Phone, 

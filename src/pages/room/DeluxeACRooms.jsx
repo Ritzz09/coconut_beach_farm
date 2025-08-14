@@ -15,6 +15,7 @@ import {
   Award,
   Phone, 
   Waves,
+  Tv,
   Bath,
   X, 
   ChevronLeft, 
