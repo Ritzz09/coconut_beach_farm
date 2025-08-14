@@ -1,7 +1,7 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useNavigate } from 'react-router-dom'; // Add this import
+import { useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, 
   Star, 
@@ -24,28 +24,78 @@ import {
   Calendar, 
   Mail, 
   MapPin,
-  // Add these new imports for the updated amenities
   Refrigerator,
   AirVent,
   MonitorSpeaker,
   Fan
 } from 'lucide-react';
 
-import img1 from "../pages/rooms/BoatHouse/1.webp";
-import img2 from "../pages/rooms/BoatHouse/2.webp";
-import img3 from "../pages/rooms/BoatHouse/3.webp";
-import img4 from "../pages/rooms/BoatHouse/4.webp";
-import img8 from "../pages/rooms/SuperDeluxeRoom/8.webp";
-import img15 from "../pages/rooms/SuperDeluxeRoom/16.webp";
-import img16 from "../pages/rooms/SuperDeluxeRoom/17.webp";
+// Your image imports...
+import img1 from "../rooms/SuperDeluxeRoom/12.webp";
+import img2 from "../rooms/SuperDeluxeRoom/1.webp";
+import img3 from "../rooms/SuperDeluxeRoom/3.webp";
+import img4 from "../rooms/SuperDeluxeRoom/4.webp";
+import img5 from "../rooms/SuperDeluxeRoom/5.webp";
+import img6 from "../rooms/SuperDeluxeRoom/6.webp";
+import img7 from "../rooms/SuperDeluxeRoom/7.webp";
+import img8 from "../rooms/SuperDeluxeRoom/8.webp";
+import img9 from "../rooms/SuperDeluxeRoom/9.webp";
+import img10 from "../rooms/SuperDeluxeRoom/10.webp";
+import img11 from "../rooms/SuperDeluxeRoom/11.webp";
+import img12 from "../rooms/SuperDeluxeRoom/13.webp";
+import img13 from "../rooms/SuperDeluxeRoom/14.webp";
+import img14 from "../rooms/SuperDeluxeRoom/15.webp";
+import img15 from "../rooms/SuperDeluxeRoom/16.webp";
+import img16 from "../rooms/SuperDeluxeRoom/17.webp";
+import img17 from "../rooms/SuperDeluxeRoom/18.webp";
+import img18 from "../rooms/SuperDeluxeRoom/19.webp";
 
-
-
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-const BoatHouse = () => {
-  const navigate = useNavigate(); // Add this hook
+const SuperDeluxeRooms = () => {
+  const navigate = useNavigate();
+  
+  // Form state using your logic
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    roomtype: "",
+    message: "",
+  });
+
+  // Popup state
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  // Form handlers using your logic
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        navigate("/thankyou");
+      } else {
+        alert("Something went wrong.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error sending appointment. Try again.");
+    }
+  };
 
   // Refs for GSAP animations
   const heroRef = useRef(null);
@@ -58,46 +108,141 @@ const BoatHouse = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [filter, setFilter] = useState('all');
 
-  // Form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    checkIn: '',
-    checkOut: '',
-    guests: '2',
-    message: ''
-  });
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState('idle');
-
-  // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Add this function for booking navigation
-  const handleBookingClick = () => {
-    // Navigate to home page
-    navigate('/');
-    
-    // Optional: Scroll to contact section after navigation
-    setTimeout(() => {
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
+  // INJECT CSS STYLES
+  useEffect(() => {
+    const styleSheet = document.createElement('style');
+    styleSheet.type = 'text/css';
+    styleSheet.innerText = `
+      .mobile-slider {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        gap: 1rem;
+        padding: 0 1rem;
       }
-    }, 100);
+      
+      .mobile-slider::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .mobile-slide {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+      }
+      
+      @media (min-width: 768px) {
+        .mobile-slider {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          overflow-x: visible;
+          scroll-snap-type: none;
+          gap: 1.5rem;
+          padding: 0;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .mobile-slider {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .mobile-slide {
+          flex: none;
+        }
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+      }
+    `;
+    
+    document.head.appendChild(styleSheet);
+    
+    return () => {
+      if (document.head.contains(styleSheet)) {
+        document.head.removeChild(styleSheet);
+      }
+    };
+  }, []);
+
+  // Handle booking click to open popup
+  const handleBookingClick = () => {
+    setIsPopupOpen(true);
+    if (!prefersReducedMotion) {
+      setTimeout(() => {
+        gsap.fromTo('.popup-form', 
+          { opacity: 0, scale: 0.8, y: 50 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+      }, 10);
+    }
   };
 
-  // Gallery images
+  // Close popup function
+  const closePopup = () => {
+    if (!prefersReducedMotion) {
+      gsap.to('.popup-form', {
+        opacity: 0,
+        scale: 0.8,
+        y: 50,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => setIsPopupOpen(false)
+      });
+    } else {
+      setIsPopupOpen(false);
+    }
+  };
+
+  // Close popup on ESC key and prevent body scroll
+  useEffect(() => {
+    const handleEscKey = (e) => {
+      if (e.key === 'Escape' && isPopupOpen) {
+        closePopup();
+      }
+    };
+
+    if (isPopupOpen) {
+      document.addEventListener('keydown', handleEscKey);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isPopupOpen]);
+
+  // Your data arrays...
   const images = [
-    { src: img1,  category: 'suite' },
+    { src: img1, category: 'suite' },
     { src: img2, category: 'amenity' },
     { src: img3, category: 'suite' },
     { src: img4, category: 'suite' },
-        { src: img15, category: 'bathroom' },
-        { src: img16,  category: 'bathroom' },
-         { src: img8, category: 'amenity' },
+    { src: img5, category: 'suite' },
+    { src: img6, category: 'suite' },
+    { src: img7, category: 'suite' },
+    { src: img8, category: 'amenity' },
+    { src: img9, category: 'suite' },
+    { src: img10, category: 'suite' },
+    { src: img11, category: 'suite' },
+    { src: img12, category: 'amenity' },
+    { src: img13, category: 'suite' },
+    { src: img14, category: 'suite' },
+    { src: img15, category: 'bathroom' },
+    { src: img16, category: 'bathroom' },
+    { src: img17, category: 'bathroom' },
+    { src: img18, category: 'bathroom' },
   ];
 
   const categories = [
@@ -126,9 +271,9 @@ const BoatHouse = () => {
   ];
 
   const contactInfo = [
-    { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567' },
-    { icon: Mail, label: 'Email', value: 'reservations@coconutbeachfarm.com' },
-    { icon: MapPin, label: 'Address', value: '123 Beach Paradise, Tropical Island' }
+    { icon: Phone, label: 'Phone', value: '+91 72768 62000' },
+    { icon: Mail, label: 'Email', value: 'rameshdeshmukh9@gmail.com' },
+    { icon: MapPin, label: 'Address', value: 'Grampanchyat Office, Thakur Ali, Shivaji Chowk, near Annpurna Hotel, Nagaon, Alibag, Maharashtra 402201' }
   ];
 
   const amenities = [
@@ -324,11 +469,10 @@ const BoatHouse = () => {
           }
         }
       );
-
     });
 
     return () => ctx.revert();
-  }, [prefersReducedMotion, filteredImages]);
+  }, [prefersReducedMotion]);
 
   // Gallery functions
   const openLightbox = (index) => {
@@ -365,104 +509,8 @@ const BoatHouse = () => {
     setSelectedImage(newIndex);
   };
 
-  // Form functions
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
-
-  const handleFocus = (e) => {
-    if (!prefersReducedMotion) {
-      const label = e.target.previousElementSibling;
-      if (label) {
-        gsap.to(label, {
-          y: -25,
-          fontSize: '0.75rem',
-          color: '#10b981',
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-      }
-    }
-  };
-
-  const handleBlur = (e) => {
-    if (!e.target.value && !prefersReducedMotion) {
-      const label = e.target.previousElementSibling;
-      if (label) {
-        gsap.to(label, {
-          y: 0,
-          fontSize: '1rem',
-          color: '#6b7280',
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-      }
-    }
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
-    if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
-    if (!formData.checkIn) newErrors.checkIn = 'Check-in date is required';
-    if (!formData.checkOut) newErrors.checkOut = 'Check-out date is required';
-
-    if (formData.checkIn && formData.checkOut && formData.checkIn >= formData.checkOut) {
-      newErrors.checkOut = 'Check-out must be after check-in';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-
-    setIsSubmitting(true);
-    
-    if (!prefersReducedMotion) {
-      gsap.to('.submit-btn', {
-        scale: 0.95,
-        duration: 0.1,
-        yoyo: true,
-        repeat: 1
-      });
-    }
-
-    try {
-      // Simulated API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        checkIn: '',
-        checkOut: '',
-        guests: '2',
-        message: ''
-      });
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-    }
-  };
-
   // Keyboard navigation for lightbox
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyPress = (e) => {
       if (selectedImage === null) return;
       
@@ -485,7 +533,6 @@ const BoatHouse = () => {
 
   return (
     <div className="super-deluxe-rooms">
-
       {/* Hero Section */}
       <section 
         ref={heroRef}
@@ -516,11 +563,11 @@ const BoatHouse = () => {
               backgroundClip: 'text'
             }}
           >
-            Boat House
+            Super Deluxe
           </h1>
 
           <p className="hero-subtitle text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Stay in our charming Boat House, a rare gem at Coconut Beach Farm where rustic coastal style meets a touch of nautical flair. With soothing water views and a warm, inviting interior, it offers a tranquil retreat just a short walk from Alibaug’s shore.
+            Stay in one of our 6 SuperDeluxeRooms, each with a mini fridge, TV, AC, and attached washroom. Blending rustic beach charm with modern comfort, they offer a peaceful retreat under coconut palms, just minutes from Alibaug's shores.
           </p>
 
           <div className="hero-buttons flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
@@ -531,7 +578,7 @@ const BoatHouse = () => {
                 color: 'white',
                 border: 'none'
               }}
-              onClick={handleBookingClick} // Add this onClick handler
+              onClick={handleBookingClick}
             >
               Book Your Stay
               <ArrowRight className="inline-block ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -548,7 +595,7 @@ const BoatHouse = () => {
       >
         {/* Stars Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          {[...Array(500)].map((_, i) => (
+          {[...Array(200)].map((_, i) => (
             <div
               key={i}
               className="absolute bg-white rounded-full"
@@ -570,17 +617,17 @@ const BoatHouse = () => {
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent mb-6">
-              Aqua Bliss
+              Ultimate Luxury
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Boat House – A Nautical Nook in Alibaug
+              SuperDeluxeRoom – Your Coastal Hideaway in Alibaug
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
             <div className="about-image overflow-hidden rounded-2xl shadow-2xl">
               <img 
-                src={img1}
+                src={img6}
                 alt="Luxurious Super Deluxe suite interior with ocean view"
                 className="w-full h-[400px] lg:h-[500px] object-cover"
                 loading="lazy"
@@ -591,7 +638,7 @@ const BoatHouse = () => {
             <div className="space-y-8">
               <div className="about-text-left">
                 <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                  Start your mornings with the sight of shimmering water and the scent of salty air. The Boat House is crafted for guests who love character, comfort, and a hint of adventure in their stay. From lazy afternoons indoors to breezy evenings outdoors, every moment here feels like an escape from the ordinary.
+                  Wake up to the gentle sound of rustling coconut palms and the fresh coastal breeze in our SuperDeluxeRooms. Designed for those who seek a perfect blend of rustic beach charm and modern comfort, each of our six exclusive rooms offers a cozy escape just minutes away from Alibaug's golden sands.
                 </p>
               </div>
 
@@ -599,17 +646,15 @@ const BoatHouse = () => {
                 <p className="text-lg text-gray-300 mb-8 leading-relaxed">
                   Inside, you'll find:
                   <br />
-                  • A plush king-size bed dressed in crisp, fresh linen
+                  • A comfy double bed with fresh linen for restful sleep
                   <br />
-                  • Air-conditioning plus a ceiling fan for year-round comfort
+                  • Air-conditioning to keep you cool on warm tropical days
                   <br />
-                  • A flat-screen TV for leisurely downtime
+                  • A mini fridge for chilled drinks and snacks anytime
                   <br />
-                  • A stocked mini fridge for chilled refreshments
+                  • A TV for relaxed evenings indoors
                   <br />
-                  • A private bathroom with hot water available on request
-                  <br />
-                  • A landline for quick and easy service access
+                  • An attached private washroom with modern fittings for convenience
                 </p>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -712,17 +757,6 @@ const BoatHouse = () => {
               </div>
             ))}
           </div>
-
-          <div className="text-center mt-16">
-            <button 
-              className="text-white px-8 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-              style={{
-                background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)"
-              }}
-            >
-              Explore Full Amenity List
-            </button>
-          </div>
         </div>
       </section>
 
@@ -734,7 +768,7 @@ const BoatHouse = () => {
       >
         {/* Stars Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          {[...Array(500)].map((_, i) => (
+          {[...Array(200)].map((_, i) => (
             <div
               key={i}
               className="absolute bg-white rounded-full"
@@ -752,7 +786,7 @@ const BoatHouse = () => {
         {/* Black Overlay */}
         <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
 
-        {/* Content - wrapped in relative z-20 to appear above overlay */}
+        {/* Content */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent mb-6">
@@ -779,16 +813,17 @@ const BoatHouse = () => {
             ))}
           </div>
 
-          <div className="gallery-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Mobile Slider / Desktop Grid */}
+          <div className="mobile-slider">
             {filteredImages.map((image, index) => (
               <div 
                 key={`${image.src}-${index}`}
-                className="gallery-item group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer"
+                className="mobile-slide gallery-item group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer"
                 onClick={() => openLightbox(index)}
               >
                 <img 
                   src={image.src}
-                  alt={image.alt}
+                  alt={image.alt || `Gallery image ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                   decoding="async"
@@ -800,13 +835,20 @@ const BoatHouse = () => {
             ))}
           </div>
 
+          {/* Mobile scroll indicator */}
+          <div className="block md:hidden text-center mt-6">
+            <p className="text-white/70 text-sm">
+              Swipe to explore more photos
+            </p>
+          </div>
+
           {/* Lightbox */}
           {selectedImage !== null && (
             <div className="lightbox fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
               <div className="relative max-w-4xl max-h-[90vh] w-full">
                 <img 
                   src={filteredImages[selectedImage].src}
-                  alt={filteredImages[selectedImage].alt}
+                  alt={filteredImages[selectedImage].alt || `Gallery image ${selectedImage + 1}`}
                   className="w-full h-full object-contain"
                 />
                 
@@ -848,91 +890,200 @@ const BoatHouse = () => {
       </section>
 
       {/* Contact Form Section */}
-      <section 
-        ref={contactRef}
-        className="py-12 lg:py-16"
-        style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="contact-content">
-            <div className="text-center mb-12">
-              <h2 
-                className="text-3xl md:text-5xl font-bold mb-4"
-                style={{
-                  background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}
-              >
-                Reserve Your Stay
-              </h2>
+<section 
+  ref={contactRef}
+  className="py-12 lg:py-16"
+  style={{ background: 'linear-gradient(360deg, rgba(220,239,245,1) 0%, rgba(184,236,255,1) 24%, rgba(255,255,255,1) 100%)' }}
+  id="contact"
+>
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="contact-content">
+      <div className="text-center mb-12">
+        <h2 
+          className="text-3xl md:text-5xl font-bold mb-4"
+          style={{
+            background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}
+        >
+          Reserve Your Stay
+        </h2>
 
-              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                Ready to experience ultimate luxury? Contact our reservations team to book your Super Deluxe Ocean Suite.
-              </p>
-            </div>
+        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          Ready to experience ultimate luxury? <br />Contact our reservations team for booking.
+        </p>
+      </div>
 
-            {/* Centered content */}
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center space-y-6">
-                <div>
-                  <h3 
-                    className="text-2xl font-bold mb-4"
+      {/* Centered content */}
+      <div className="max-w-full mx-auto">
+        <div className="text-center space-y-8">
+          <div>
+            <h3 
+              className="text-2xl font-bold mb-8"
+              style={{
+                background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+            >
+              Get In Touch
+            </h3>
+
+            {/* Optimized contact info - icon and label on same line */}
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 mb-8">
+              {contactInfo.map((info, index) => (
+                <div
+                  key={index}
+                  className="w-full lg:w-1/3 text-center sm:text-left lg:text-center"
+                >
+                  {/* Icon and Label on same line */}
+                  <div className="flex items-center justify-center sm:justify-start lg:justify-center mb-2 lg:mb-3">
+                    <div className="w-6 h-6 lg:w-7 lg:h-7 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3">
+                      <info.icon className="w-4 h-4 lg:w-5 lg:h-5 text-emerald-600" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-sm lg:text-lg">
+                      {info.label}
+                    </div>
+                  </div>
+                  
+                  {/* Value on separate line */}
+                  <div 
+                    className="text-gray-600 text-xs lg:text-sm leading-relaxed lg:leading-normal px-2"
                     style={{
-                      background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)",
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text'
+                      wordBreak: 'break-word',
+                      hyphens: 'auto',
+                      maxWidth: '100%'
                     }}
                   >
-                    Get In Touch
-                  </h3>
-
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Our dedicated reservations team is available 24/7 to assist you with booking 
-                    your perfect getaway. We're here to make your stay unforgettable.
-                  </p>
-
-                  {/* Horizontal contact info */}
-                  <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-4 md:gap-6 mb-6">
-                    {contactInfo.map((info, index) => (
-                      <div
-                        key={index}
-                        className="flex flex-col sm:flex-row items-center sm:items-start sm:space-x-2 w-full sm:w-auto justify-center text-center sm:text-left"
-                      >
-                        <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mb-2 sm:mb-0">
-                          <info.icon className="w-8 h-8 text-emerald-600" />
-                        </div>
-                        <div>
-                          <div className="font-medium text-gray-900 text-l">{info.label}</div>
-                          <div className="text-gray-600 text-l">{info.value}</div>
-                        </div>
-                      </div>
-                    ))}
+                    {info.value}
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
 
-                {/* Centered Send Inquiry Button */}
-                <button
-                  type="button"
-                  className="submit-btn text-white px-12 py-4 rounded-lg font-semibold text-base transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center mx-auto"
-                  style={{
-                    background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)"
-                  }}
-                  onClick={handleBookingClick} // Add this onClick handler
-                >
-                  Book Your Stay
-                  <Send className="ml-2 w-4 h-4" />
-                </button>
-              </div>
+          {/* Centered Send Inquiry Button */}
+          <button
+            onClick={handleBookingClick}
+            className="px-8 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl text-white"
+            style={{
+              background: "linear-gradient(to right, #24243e, #302b63, #0f0c29)"
+            }}
+          >
+            <Send className="inline-block mr-2 w-5 h-5" />
+            Send Inquiry
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+      {/* Popup Modal */}
+      {isPopupOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="popup-form relative w-full max-w-6xl max-h-[90vh] overflow-y-auto mx-4">
+            <div className="relative bg-slate-950/80 backdrop-blur-md shadow-2xl border-2 border-white/10 
+                rounded-2xl lg:p-6 p-4 text-white transition-transform duration-500 ease-in-out" >
+              {/* Close button */}
+              <button
+                onClick={closePopup}
+                className="absolute top-4 right-4 z-20 w-8 h-8 bg-red-500/20 hover:bg-red-500/40 rounded-full flex items-center justify-center text-white transition-colors"
+                aria-label="Close form"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Form Content */}
+              <div className="w-full border-t-8 border-dotted border-[#dceff5] mb-4"></div>
+              <h2 className="text-3xl font-bold text-[#dceff5] mb-6 text-center">Get in Touch</h2>
+              
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      name="name"
+                      onChange={handleChange}
+                      value={formData.name}
+                      required
+                      className="w-full px-4 py-2 bg-transparent border border-white/20 rounded-md placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition"
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Phone Number"
+                      name="phone"
+                      onChange={handleChange}
+                      value={formData.phone}
+                      required
+                      className="w-full px-4 py-2 bg-transparent border border-white/20 rounded-md placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      name="email"
+                      onChange={handleChange}
+                      value={formData.email}
+                      className="w-full px-4 py-2 bg-transparent border border-white/20 rounded-md placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition"
+                    />
+                    <select
+                      name="roomtype"
+                      onChange={handleChange}
+                      value={formData.roomtype}
+                      className="w-full px-4 py-2 bg-slate-800 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition"
+                    >
+                      <option className="text-slate-900" value="">Choose Room Type</option>
+                      <option className="text-slate-900" value="superdeluxe">Super Deluxe</option>
+                      <option className="text-slate-900" value="duplex">Duplex Room</option>
+                      <option className="text-slate-900" value="treehouse">Tree House</option>
+                      <option className="text-slate-900" value="boathouse">Boat House</option>
+                      <option className="text-slate-900" value="trianglehouse">Triangle House</option>
+                    </select>
+                    <textarea
+                      placeholder="Your message"
+                      name="message"
+                      onChange={handleChange}
+                      value={formData.message}
+                      rows="4"
+                      className="w-full px-4 py-2 bg-transparent border border-white/20 rounded-md placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition resize-none"
+                    />
+                    <div className="text-center">
+                      <button
+                        type="submit"
+                        className="bg-[#0F0D1D] hover:bg-[#dceff5] hover:text-[#0F0D1D] text-[#dceff5] border border-white/10 font-semibold py-3 px-8 rounded-full transition duration-300"
+                      >
+                        Send Message
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Map Section */}
+                  <div className="w-full h-64 lg:h-full rounded-xl border-2 border-white/10 p-2 overflow-hidden hidden md:block">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.7661704452694!2d72.9017083!3d18.613075599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be87a9fa94d3c07%3A0x5b4b17ff34289dc4!2sCoconut%20Beach%20Farm%20Resorts%20in%20Alibaug%20Beach%20Maharashtra!5e1!3m2!1sen!2sin!4v1754425136387!5m2!1sen!2sin"
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="rounded-lg"
+                    ></iframe>
+                  </div>
+                </div>
+              </form>
+              
+              <div className="w-full border-b-8 border-dotted border-[#0F0D1D] mt-6"></div>
             </div>
           </div>
         </div>
-      </section>
-
+      )}
     </div>
   );
 };
 
-export default BoatHouse;
+export default SuperDeluxeRooms;

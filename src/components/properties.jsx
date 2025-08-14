@@ -46,7 +46,7 @@ export default function Properties() {
         name: "",
         email: "",
         phone: "",
-        location: "",
+        roomtype: "",
         message: "",
     });
     const handleChange = (e) => {
@@ -310,14 +310,16 @@ export default function Properties() {
                                 className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="600"
                             />
                             <select
-                                name="location" onChange={handleChange} value={formData.location}
+                                name="roomtype" onChange={handleChange} value={formData.roomtype}
 
                                 className="w-full px-4 py-2  border border-white/20 rounded-md  placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition" data-aos="zoom-in" data-aos-delay="700"
                             >
-                                <option className="text-slate-900" value="">Choose Location</option>
-                                <option className="text-slate-900" value="alibaug">Alibaug</option>
-                                <option className="text-slate-900" value="panchgani">Panchgani</option>
-                                <option className="text-slate-900" value="lonavala">Lonavala</option>
+                                                      <option className="text-slate-900" value="">Choose Room Type</option>
+                      <option className="text-slate-900" value="superdeluxe">Super Deluxe</option>
+                      <option className="text-slate-900" value="duplex">Duplex Room</option>
+                      <option className="text-slate-900" value="treehouse">Tree House</option>
+                      <option className="text-slate-900" value="boathouse">Boat House</option>
+                      <option className="text-slate-900" value="trianglehouse">Triangle House</option>
                             </select>
                             <input
                                 type="message"

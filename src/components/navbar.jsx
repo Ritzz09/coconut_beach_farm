@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaHome, FaHotel, FaImages, FaMonument, FaBars, FaTimes, FaPhoneAlt, FaChevronDown, FaBed, FaUsers, FaCrown } from "react-icons/fa";
+import {FaTree, FaShip, FaShapes } from 'react-icons/fa';
+
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import gsap from "gsap";
@@ -12,19 +14,20 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [roomsDropdownOpen, setRoomsDropdownOpen] = useState(false);
+  const [mobileRoomsDropdownOpen, setMobileRoomsDropdownOpen] = useState(false);
 
   const navbarRef = useRef(null);
   const menuRef = useRef(null);
   const dropdownRef = useRef(null);
 
   // Room types for dropdown - Updated with correct paths
-  const roomTypes = [
-    { name: "Super Deluxe Rooms", icon: <FaBed />, href: "/SuperDeluxePage", isPage: true },
-    { name: "Deluxe A/C Rooms", icon: <FaUsers />, href: "/DeluxeACRooms", isPage: true},
-    { name: "Tree House", icon: <FaCrown />, href: "/TreeHouse", isPage: true },
-    { name: "Boat House", icon: <FaBed />, href: "/BoatHouse", isPage: true },
-    { name: "Triangle Room", icon: <FaBed />, href: "/TriangleRoom", isPage: true },
-  ];
+const roomTypes = [
+  { name: "Super Deluxe Rooms", icon: <FaBed />, href: "/room/super-deluxe", isPage: true },
+  { name: "Duplex A/C Rooms", icon: <FaHome />, href: "/room/deluxe-ac-room", isPage: true },
+  { name: "Tree House", icon: <FaTree />, href: "/room/tree-house", isPage: true },
+  { name: "Boat House", icon: <FaShip />, href: "/room/boat-house", isPage: true },
+  { name: "Triangle Room", icon: <FaShapes />, href: "/room/triangle-room", isPage: true },
+];
 
   const sections = [
     { name: "Rooms", icon: <FaHotel />, href: "#rooms", hasDropdown: true },
@@ -95,6 +98,7 @@ export default function Navbar() {
     setActiveSection(name);
     setIsMobileMenuOpen(false);
     setRoomsDropdownOpen(false);
+    setMobileRoomsDropdownOpen(false);
   };
 
   // Keep the original function for backward compatibility
@@ -103,11 +107,11 @@ export default function Navbar() {
   };
 
   const handleRoomsClick = () => {
-    if (window.innerWidth >= 768) {
-      setRoomsDropdownOpen(!roomsDropdownOpen);
-    } else {
-      scrollToSection("#rooms", "Rooms");
-    }
+    setRoomsDropdownOpen(!roomsDropdownOpen);
+  };
+
+  const handleMobileRoomsClick = () => {
+    setMobileRoomsDropdownOpen(!mobileRoomsDropdownOpen);
   };
 
   return (
@@ -158,7 +162,7 @@ export default function Navbar() {
                 <span className="block h-0.5 w-0 group-hover:w-full bg-sky-300 transition-all duration-300"></span>
               </motion.div>
 
-              {/* Dropdown Menu */}
+              {/* Desktop Dropdown Menu */}
               {item.hasDropdown && (
                 <AnimatePresence>
                   {roomsDropdownOpen && (
@@ -195,40 +199,69 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden flex flex-col items-center bg-white/80 py-10 gap-6 shadow-md text-black">
-          {sections.map((item, index) => (
-            <div key={index} className="w-full flex flex-col items-center">
-              <div
-                onClick={() => scrollToSection(item.href, item.name)}
-                className={clsx(
-                  "flex items-center gap-2 text-lg font-semibold cursor-pointer",
-                  activeSection === item.name ? "text-sky-500" : "hover:text-sky-500"
-                )}
-              >
-                <span className="text-xl">{item.icon}</span>
-                {item.name}
-              </div>
-
-              {/* Mobile dropdown for rooms */}
-              {item.hasDropdown && (
-                <div className="mt-2 flex flex-col items-center gap-2">
-                  {roomTypes.map((room, roomIndex) => (
-                    <div
-                      key={roomIndex}
-                      onClick={() => handleNavigation(room.href, room.name, room.isPage)}
-                      className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-sky-500 cursor-pointer pl-6"
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden flex flex-col items-center bg-white/90 backdrop-blur-sm py-6 shadow-lg"
+          >
+            {sections.map((item, index) => (
+              <div key={index} className="w-full flex flex-col items-center">
+                <motion.div
+                  onClick={() => item.hasDropdown ? handleMobileRoomsClick() : scrollToSection(item.href, item.name)}
+                  className={clsx(
+                    "flex items-center gap-2 text-lg font-semibold cursor-pointer py-3 transition-colors",
+                    activeSection === item.name ? "text-sky-500" : "text-gray-800 hover:text-sky-500"
+                  )}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-xl">{item.icon}</span>
+                  <span>{item.name}</span>
+                  {item.hasDropdown && (
+                    <motion.span
+                      className="text-sm ml-1"
+                      animate={{ rotate: mobileRoomsDropdownOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
                     >
-                      <span>{room.icon}</span>
-                      <span>{room.name}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+                      <FaChevronDown />
+                    </motion.span>
+                  )}
+                </motion.div>
+
+                {/* Mobile Rooms Dropdown */}
+                {item.hasDropdown && (
+                  <AnimatePresence>
+                    {mobileRoomsDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-full flex flex-col items-center bg-gray-50/80 rounded-lg mx-4 mb-2 overflow-hidden"
+                      >
+                        {roomTypes.map((room, roomIndex) => (
+                          <motion.div
+                            key={roomIndex}
+                            onClick={() => handleNavigation(room.href, room.name, room.isPage)}
+                            className="flex items-center gap-3 text-sm font-medium text-gray-700 hover:text-sky-500 hover:bg-sky-50 cursor-pointer py-3 px-6 w-full transition-colors"
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <span className="text-base">{room.icon}</span>
+                            <span>{room.name}</span>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
