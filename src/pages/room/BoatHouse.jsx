@@ -1015,12 +1015,12 @@ const BoatHouse = () => {
                       value={formData.roomtype}
                       className="w-full px-4 py-2 bg-slate-800 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition"
                     >
-                      <option className="text-slate-900" value="">Choose Room Type</option>
-                      <option className="text-slate-900" value="superdeluxe">Super Deluxe</option>
-                      <option className="text-slate-900" value="duplex">Duplex Room</option>
-                      <option className="text-slate-900" value="treehouse">Tree House</option>
-                      <option className="text-slate-900" value="boathouse">Boat House</option>
-                      <option className="text-slate-900" value="trianglehouse">Triangle House</option>
+                      <option className="text-white" value="">Choose Room Type</option>
+                      <option className="text-white" value="superdeluxe">Super Deluxe</option>
+                      <option className="text-white" value="duplex">Duplex Room</option>
+                      <option className="text-white" value="treehouse">Tree House</option>
+                      <option className="text-white" value="boathouse">Boat House</option>
+                      <option className="text-white" value="trianglehouse">Triangle House</option>
                     </select>
                     <textarea
                       placeholder="Your message"
